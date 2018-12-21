@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
+    <script src="js/vue.min.js"></script>
+    <title>电商系统</title>
+</head>
+<body>
+<div class="container" id="app">
+    <!--固定头部菜单栏目-->
+    <div class="top-nav clearfix">
+        <div class="top-nav-fl fl"><img class="top-nav-fl-img" src="images/logo.jpg" />宁波电商城海曙园区信息统计系统</div>
+        <div class="top-nav-fr fr" id="close"><img class="top-nav-fr-img" src="images/close.png" />关闭本页</div>
+    </div>
+    <!--固定左边菜单栏目-->
+    <div class="left-nav">
+        <div class="left-nav-container">
+
+            <div class="nav nav-a nav-a1 "><a href="index.html">
+                <div class="nav-t1"><img class="nav-t1-img" src="images/nav-01-a.png" /></div>
+                <div class="nav-t2">首页</div>
+            </a></div>
+            <div class="nav"><a>
+                <div class="nav-t1"><img class="nav-t1-img" src="images/nav-02.png" /></div>
+                <div class="nav-t2">电商企业</div>
+            </a></div>
+            <div class="nav"><a>
+                <div class="nav-t1"><img class="nav-t1-img" src="images/nav-03.png" /></div>
+                <div class="nav-t2">服务外包企业</div>
+            </a></div>
+            <div class="nav"><a>
+                <div class="nav-t1"><img class="nav-t1-img" src="images/nav-04.png" /></div>
+                <div class="nav-t2">软件和信息技术服务业</div>
+            </a></div>
+            <div class="nav"><a>
+                <div class="nav-t1"><img class="nav-t1-img" src="images/nav-05.png" /></div>
+                <div class="nav-t2">其他企业</div>
+            </a></div>
+
+        </div>
+    </div>
+    <!--主要内容-->
+    <div class="main">
+        <div class="map">
+            <div id="dituContent"></div>
+        </div>
+        <!--漂浮窗-->
+        <div class="Floating">
+            <div class="Floating-container">
+                <!--筛选模块-->
+                <div class="sift-container">
+                    <div class="sift-item">
+                        <!--一组-->
+                        <div class="list">
+                            <div class="list-01 clearfix">
+                                <div class="list-01-fl fl">销售总额区间</div>
+                                <div class="list-01-fr fr"><img class="list-01-fr-img" src="images/index-down.png" /></div>
+                            </div>
+                            <div class="list-02  clearfix">
+                                <div class="list-02-t fl"><span class="span-01 span-01a">0-10万</span>、</div>
+                                <div class="list-02-t fl"><span class="span-01">10-100万</span>、</div>
+                                <div class="list-02-t fl"><span class="span-01">100-300万</span>、</div>
+                                <div class="list-02-t fl"><span class="span-01">300-500万</span>、</div>
+                                <div class="list-02-t fl"><span class="span-01">500-1000万</span>、</div>
+                                <div class="list-02-t fl"><span class="span-01">1000万以上</span>、</div>
+                            </div>
+                        </div>
+                        <!--一组 结束-->
+                        <div class="list">
+                            <div class="list-01 clearfix">
+                                <div class="list-01-fl fl">纳税总额区间</div>
+                                <div class="list-01-fr fr"><img class="list-01-fr-img" src="images/index-down.png" /></div>
+                            </div>
+                            <div class="list-02 hide clearfix">
+                                <div class="list-02-t fl"><span class="span-01">0-10万</span>、</div>
+                                <div class="list-02-t fl"><span class="span-01">10-100万</span>、</div>
+                                <div class="list-02-t fl"><span class="span-01">100-300万</span>、</div>
+                                <div class="list-02-t fl"><span class="span-01">300-500万</span>、</div>
+                                <div class="list-02-t fl"><span class="span-01">500-1000万</span>、</div>
+                                <div class="list-02-t fl"><span class="span-01">1000万以上</span>、</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sift-btn clearfix">
+                        <div class="sift-btn-fl fl">报表异常（33）</div>
+                        <div class="sift-btn-fl sift-btn-fr fr">报表异常（09）</div>
+                    </div>
+                </div>
+                <!--数据加分页-->
+                <div class="fy-container">
+                    <div class="fy-top">
+                        <!--一组-->
+                        <div class="fy-top-list clearfix">
+                            <div class="fy-top-list-fl fl">1</div>
+                            <div class="fy-top-list-fr fr">
+                                <div class="fy-top-list-fr-01">宁波君灵模具技术有限公司</div>
+                                <div class="fy-top-list-fr-02">地 址：宁波市北仑区大碶官塘河路36号</div>
+                            </div>
+                        </div>
+                        <!--一组 结束-->
+                        <div class="fy-top-list clearfix">
+                            <div class="fy-top-list-fl fl">2</div>
+                            <div class="fy-top-list-fr fr">
+                                <div class="fy-top-list-fr-01">宁波君灵模具技术有限公司</div>
+                                <div class="fy-top-list-fr-02">地 址：宁波市北仑区大碶官塘河路36号</div>
+                            </div>
+                        </div>
+                        <div class="fy-top-list clearfix">
+                            <div class="fy-top-list-fl fl">3</div>
+                            <div class="fy-top-list-fr fr">
+                                <div class="fy-top-list-fr-01">宁波君灵模具技术有限公司</div>
+                                <div class="fy-top-list-fr-02">地 址：宁波市北仑区大碶官塘河路36号</div>
+                            </div>
+                        </div>
+                        <div class="fy-top-list clearfix">
+                            <div class="fy-top-list-fl fl">4</div>
+                            <div class="fy-top-list-fr fr">
+                                <div class="fy-top-list-fr-01">宁波君灵模具技术有限公司</div>
+                                <div class="fy-top-list-fr-02">地 址：宁波市北仑区大碶官塘河路36号</div>
+                            </div>
+                        </div>
+                        <div class="fy-top-list clearfix">
+                            <div class="fy-top-list-fl fl">5</div>
+                            <div class="fy-top-list-fr fr">
+                                <div class="fy-top-list-fr-01">宁波君灵模具技术有限公司</div>
+                                <div class="fy-top-list-fr-02">地 址：宁波市北仑区大碶官塘河路36号</div>
+                            </div>
+                        </div>
+                        <div class="fy-top-list clearfix">
+                            <div class="fy-top-list-fl fl">6</div>
+                            <div class="fy-top-list-fr fr">
+                                <div class="fy-top-list-fr-01">宁波君灵模具技术有限公司</div>
+                                <div class="fy-top-list-fr-02">地 址：宁波市北仑区大碶官塘河路36号</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="fy-c clearfix">
+                        <div class="fy fy-f fy-no fl">上一页</div>
+                        <div class="fy fy-a fl">1</div>
+                        <div class="fy fl">2</div>
+                        <div class="fy fl">3</div>
+                        <div class="fy fl">4</div>
+                        <div class="fy fy-f fl">下一页</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--漂浮窗 结束-->
+        <!--展示名片-->
+        <div class="show hide">
+            <div class="show-container">
+                <div class="show-title">银润豪景电商大厦</div>
+                <div class="show-t2 clearfix">
+                    <div class="show-t2-fl fl"><img class="show-t2-fl-img" src="images/index-map01.jpg" /></div>
+                    <div class="show-t2-fr fl">
+                        <div class="show-t2-fr-01">企业名称：银润豪景电商大厦</div>
+                        <div class="show-t2-fr-01">所  在 地：海曙区</div>
+                        <div class="show-t2-fr-01">企业法人：王晓东</div>
+                        <div class="show-t2-fr-01">联系电话：1522025202XX</div>
+                        <div class="show-t2-fr-01">登记时间：2018-02-02</div>
+                    </div>
+                </div>
+                <div class="show-table">
+                    <div class="show-table-title clearfix">
+                        <div class="show-table-title-fl show-table-title-fl-a fl" id="qyjj">企业简介</div>
+                        <div class="show-table-title-fl fl" id="jdbb">季度报表</div>
+                        <div class="show-table-title-fl fl" id="zcsbb">政策申报表</div>
+                    </div>
+                    <div class="show-table-content">
+                        <!--企业简介-->
+                        <div class="show-table-content-01" id="qyjj_c">
+                            <div class="show-table-content-01-t1">“中国兵器工业集团军民双向技术转移中心”，是以中国兵器工业集团兵器科学研究宁波分院为依托单位，立足于兵器工业，充分利用浙江经济发展优势，通过服务加速兵器科技成果转化，构筑服务于兵器工业和浙江省以及面向长三角地区的技术转移平台。</div>
+                        </div>
+                        <!--季度报表-->
+                        <div class="show-table-content-02 hide" id="jdbb_c">
+                            <div class="show-table-content-02-title clearfix">
+                                <div class="show-table-content-02-title-fl fl">各企业类型第X季度销售总额分析</div>
+                                <div class="show-table-content-02-title-fr  fr">
+                                    <div class="show-table-content-02-title-fl-t1"><span class="span-02">2018第一季度</span><img class="show-table-content-02-title-fl-t1-img" src="images/index-down.png" /></div>
+                                    <div class="show-table-content-02-title-fl-t2 hide">
+                                        <div class="s-t-c-0-t-f-t-t">2016第一季度</div>
+                                        <div class="s-t-c-0-t-f-t-t">2016第二季度</div>
+                                        <div class="s-t-c-0-t-f-t-t">2016第三季度</div>
+                                        <div class="s-t-c-0-t-f-t-t">2016第四季度</div>
+                                        <div class="s-t-c-0-t-f-t-t">2018第一季度</div>
+                                        <div class="s-t-c-0-t-f-t-t">2018第二季度</div>
+                                        <div class="s-t-c-0-t-f-t-t">2018第三季度</div>
+                                        <div class="s-t-c-0-t-f-t-t">2018第四季度</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="show-table-content-02-main">
+                                <div id="main"></div>
+                            </div>
+                        </div>
+                        <!--政策申报表-->
+                        <div class="show-table-content-03 hide" id="zcsbb_c">
+                            <div class="show-table-content-03-t1 clearfix">
+                                <!--年份-->
+                                <div class="show-table-content-03-t1-fl fl">
+                                    <div class="show-table-content-03-t1-fl-t"><span class="span-03">年份</span><img class="show-table-content-03-t1-fl-t-img" src="images/index-down.png" /></div>
+                                    <div class="show-table-content-03-t1-fl-t1 hide">
+                                        <div class="show-table-content-03-t1-fl-t1-t">2014年</div>
+                                        <div class="show-table-content-03-t1-fl-t1-t">2015年</div>
+                                        <div class="show-table-content-03-t1-fl-t1-t">2016年</div>
+                                        <div class="show-table-content-03-t1-fl-t1-t">2017年</div>
+                                        <div class="show-table-content-03-t1-fl-t1-t">2018年</div>
+                                        <div class="show-table-content-03-t1-fl-t1-t">2019年</div>
+                                    </div>
+                                </div>
+                                <!--财政补贴-->
+                                <div class="show-table-content-03-t1-fl fl">
+                                    <div class="show-table-content-03-t1-fl-t"><span class="span-03">财政补贴</span><img class="show-table-content-03-t1-fl-t-img" src="images/index-down.png" /></div>
+                                    <div class="show-table-content-03-t1-fl-t1 hide">
+                                        <div class="show-table-content-03-t1-fl-t1-t">￥20,000,0</div>
+                                        <div class="show-table-content-03-t1-fl-t1-t">￥20,000,0</div>
+                                        <div class="show-table-content-03-t1-fl-t1-t">￥20,000,0</div>
+                                        <div class="show-table-content-03-t1-fl-t1-t">￥20,000,0</div>
+                                        <div class="show-table-content-03-t1-fl-t1-t">￥20,000,0</div>
+                                    </div>
+                                </div>
+                                <!--完税证明-->
+                                <div class="show-table-content-03-t2-fl fl"><a href="#">完税证明</a></div>
+                            </div>
+                            <div class="show-table-content-03-t2 clearfix">
+
+                                <div class="show-cz fl">销售总额:</div>
+                                <div class="show-cz01 fl"></div>
+                                <div class="show-cz fl">增税值:</div>
+                                <div class="show-cz01 fl"></div>
+                                <div class="show-cz fl">企业所得税:</div>
+                                <div class="show-cz01 fl"></div>
+                                <div class="show-cz fl">申领金额:</div>
+                                <div class="show-cz01 fl"></div>
+                                <div class="show-cz fl">补助区间:</div>
+                                <div class="show-cz01 fl"></div>
+                                <div class="show-cz fl"></div>
+                                <div class="show-cz01 fl"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--展示名片 结束-->
+    </div>
+</div>
+
+
+
+<script src="js/jquery.min.js"></script>
+<script>
+    // VUE框架
+    new Vue({
+        el: '#app',
+        data: {
+
+        }
+    });
+
+
+</script>
+<script src="js/bane.js"></script>
+<script>
+    // 销售总额点击
+    $(document).on("click",".list-02-t",function () {
+        if($(this).find(".span-01").hasClass("span-01a")){
+            $(this).find(".span-01").removeClass("span-01a");
+            $(this).siblings().find(".span-01").addClass("span-01a");
+        }else {
+            $(this).find(".span-01").addClass("span-01a");
+            $(this).siblings().find(".span-01").removeClass("span-01a");
+        }
+    });
+    // 销售总额下拉
+    $(document).on("click",".list-01",function () {
+       if($(this).siblings().hasClass("hide")){
+           $(this).siblings().slideDown();
+           $(this).siblings().removeClass("hide");
+       }else {
+           $(this).siblings().slideUp();
+           $(this).siblings().addClass("hide");
+       }
+    });
+    // 地图信息窗口点击
+    function tabs01() {
+        $("#qyjj_c").removeClass("hide");
+        $("#qyjj_c").siblings().addClass("hide");
+        $("#qyjj").addClass("show-table-title-fl-a");
+        $("#qyjj").siblings().removeClass("show-table-title-fl-a");
+    }
+    function tabs02() {
+        $("#jdbb_c").removeClass("hide");
+        $("#jdbb_c").siblings().addClass("hide");
+        $("#jdbb").addClass("show-table-title-fl-a");
+        $("#jdbb").siblings().removeClass("show-table-title-fl-a");
+
+        earchts()
+
+    }
+    function tabs03() {
+        $("#zcsbb_c").removeClass("hide");
+        $("#zcsbb_c").siblings().addClass("hide");
+        $("#zcsbb").addClass("show-table-title-fl-a");
+        $("#zcsbb").siblings().removeClass("show-table-title-fl-a");
+    }
+  
+    // 季度表表选择年份
+    function choose01() {
+        if($(".show-table-content-02-title-fl-t1").siblings().hasClass("hide")){
+            $(".show-table-content-02-title-fl-t1").siblings().slideDown();
+            $(".show-table-content-02-title-fl-t1").siblings().removeClass("hide");
+        }else {
+            $(".show-table-content-02-title-fl-t1").siblings().slideUp();
+            $(".show-table-content-02-title-fl-t1").siblings().addClass("hide");
+        }
+    }
+    // 点击选择更换年份
+    function choose02(obj) {
+        var nf_vaule = $(obj).text();
+        $(".span-02").html(nf_vaule);
+        $(".show-table-content-02-title-fl-t2").slideUp();
+        $(".show-table-content-02-title-fl-t2").addClass("hide");
+    }
+    // 政策申报表选择年份
+    function choose03(obj) {
+        if($(obj).siblings().hasClass("hide")){
+            $(obj).siblings().slideDown();
+            $(obj).siblings().removeClass("hide");
+        }else {
+            $(obj).siblings().slideUp();
+            $(obj).siblings().addClass("hide");
+        }
+    }
+    // 点击筛选政策申报表
+    function choose04(obj) {
+        var nf_vaule02 = $(obj).text();
+        $(obj).parent().siblings().html(nf_vaule02);
+        $(".show-table-content-03-t1-fl-t1").slideUp();
+        $(".show-table-content-03-t1-fl-t1").addClass("hide");
+    }
+
+    
+</script>
+
+<script src="js/echarts.min.js"></script>
+
+<script type="text/javascript">
+    var map = new BMap.Map("dituContent");          // 创建地图实例
+    var point = new BMap.Point(121.767688, 29.871121);  // 创建点坐标
+    map.centerAndZoom(point, 17);                 // 初始化地图，设置中心点坐标和地图级别
+    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+
+
+
+
+
+
+
+
+    $(document).on("click",".fy-top-list",function () {
+        var marker = new BMap.Marker(point);        // 创建标注
+        map.addOverlay(marker);                     // 将标注添加到地图中
+        openwin();
+
+    });
+    // 地图信息窗口
+    function openwin() {
+        var sContent ='<div class="show" id="markerInfo">\n' +
+            '            <div class="show-container">\n' +
+            '                <div class="show-title">银润豪景电商大厦</div>\n' +
+            '                <div class="show-t2 clearfix">\n' +
+            '                    <div class="show-t2-fl fl"><img class="show-t2-fl-img" src="images/index-map01.jpg" /></div>\n' +
+            '                    <div class="show-t2-fr fl">\n' +
+            '                        <div class="show-t2-fr-01">企业名称：银润豪景电商大厦</div>\n' +
+            '                        <div class="show-t2-fr-01">所  在 地：海曙区</div>\n' +
+            '                        <div class="show-t2-fr-01">企业法人：王晓东</div>\n' +
+            '                        <div class="show-t2-fr-01">联系电话：1522025202XX</div>\n' +
+            '                        <div class="show-t2-fr-01">登记时间：2018-02-02</div>\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '                <div class="show-table">\n' +
+            '                    <div class="show-table-title clearfix">\n' +
+            '                        <div class="show-table-title-fl show-table-title-fl-a fl" id="qyjj" onClick="tabs01()">企业简介</div>\n' +
+            '                        <div class="show-table-title-fl fl" id="jdbb" onClick="tabs02()">季度报表</div>\n' +
+            '                        <div class="show-table-title-fl fl" id="zcsbb" onClick="tabs03()">政策申报表</div>\n' +
+            '                    </div>\n' +
+            '                    <div class="show-table-content">\n' +
+            '                        <!--企业简介-->\n' +
+            '                        <div class="show-table-content-01" id="qyjj_c">\n' +
+            '                            <div class="show-table-content-01-t1">“中国兵器工业集团军民双向技术转移中心”，是以中国兵器工业集团兵器科学研究宁波分院为依托单位，立足于兵器工业，充分利用浙江经济发展优势，通过服务加速兵器科技成果转化，构筑服务于兵器工业和浙江省以及面向长三角地区的技术转移平台。</div>\n' +
+            '                        </div>\n' +
+            '                        <!--季度报表-->\n' +
+            '                        <div class="show-table-content-02 hide" id="jdbb_c">\n' +
+            '                            <div class="show-table-content-02-title clearfix">\n' +
+            '                                <div class="show-table-content-02-title-fl fl">各企业类型第X季度销售总额分析</div>\n' +
+            '                                <div class="show-table-content-02-title-fr  fr">\n' +
+            '                                    <div class="show-table-content-02-title-fl-t1" onClick="choose01()"><span class="span-02">2018第一季度</span><img class="show-table-content-02-title-fl-t1-img" src="images/index-down.png" /></div>\n' +
+            '                                    <div class="show-table-content-02-title-fl-t2 hide">\n' +
+            '                                        <div class="s-t-c-0-t-f-t-t" onclick="choose02(this)">2016第一季度</div>\n' +
+            '                                        <div class="s-t-c-0-t-f-t-t" onclick="choose02(this)">2016第二季度</div>\n' +
+            '                                        <div class="s-t-c-0-t-f-t-t" onclick="choose02(this)">2016第三季度</div>\n' +
+            '                                        <div class="s-t-c-0-t-f-t-t" onclick="choose02(this)">2016第四季度</div>\n' +
+            '                                        <div class="s-t-c-0-t-f-t-t" onclick="choose02(this)">2018第一季度</div>\n' +
+            '                                        <div class="s-t-c-0-t-f-t-t" onclick="choose02(this)">2018第二季度</div>\n' +
+            '                                        <div class="s-t-c-0-t-f-t-t" onclick="choose02(this)">2018第三季度</div>\n' +
+            '                                        <div class="s-t-c-0-t-f-t-t" onclick="choose02(this)">2018第四季度</div>\n' +
+            '                                    </div>\n' +
+            '                                </div>\n' +
+            '                            </div>\n' +
+            '                            <div class="show-table-content-02-main">\n' +
+            '                                <div id="main"></div>\n' +
+            '                            </div>\n' +
+            '                        </div>\n' +
+            '                        <!--政策申报表-->\n' +
+            '                        <div class="show-table-content-03 hide" id="zcsbb_c">\n' +
+            '                            <div class="show-table-content-03-t1 clearfix">\n' +
+            '                                <!--年份-->\n' +
+            '                                <div class="show-table-content-03-t1-fl fl">\n' +
+            '                                    <div class="show-table-content-03-t1-fl-t" onclick="choose03(this)"><span class="span-03">年份</span><img class="show-table-content-03-t1-fl-t-img" src="images/index-down.png" /></div>\n' +
+            '                                    <div class="show-table-content-03-t1-fl-t1 hide">\n' +
+            '                                        <div class="show-table-content-03-t1-fl-t1-t" onclick="choose04(this)">2014年</div>\n' +
+            '                                        <div class="show-table-content-03-t1-fl-t1-t" onclick="choose04(this)">2015年</div>\n' +
+            '                                        <div class="show-table-content-03-t1-fl-t1-t" onclick="choose04(this)">2016年</div>\n' +
+            '                                        <div class="show-table-content-03-t1-fl-t1-t" onclick="choose04(this)">2017年</div>\n' +
+            '                                        <div class="show-table-content-03-t1-fl-t1-t" onclick="choose04(this)">2018年</div>\n' +
+            '                                        <div class="show-table-content-03-t1-fl-t1-t" onclick="choose04(this)">2019年</div>\n' +
+            '                                    </div>\n' +
+            '                                </div>\n' +
+            '                                <!--财政补贴-->\n' +
+            '                                <div class="show-table-content-03-t1-fl fl">\n' +
+            '                                    <div class="show-table-content-03-t1-fl-t" onclick="choose03(this)"><span class="span-03">财政补贴</span><img class="show-table-content-03-t1-fl-t-img" src="images/index-down.png" /></div>\n' +
+            '                                    <div class="show-table-content-03-t1-fl-t1 hide">\n' +
+            '                                        <div class="show-table-content-03-t1-fl-t1-t" onclick="choose04(this)">￥20,000,0</div>\n' +
+            '                                        <div class="show-table-content-03-t1-fl-t1-t" onclick="choose04(this)">￥1,000,0</div>\n' +
+            '                                        <div class="show-table-content-03-t1-fl-t1-t" onclick="choose04(this)">￥88,000,0</div>\n' +
+            '                                        <div class="show-table-content-03-t1-fl-t1-t" onclick="choose04(this)">￥20,666,0</div>\n' +
+            '                                        <div class="show-table-content-03-t1-fl-t1-t" onclick="choose04(this)">￥19,99,0</div>\n' +
+            '                                    </div>\n' +
+            '                                </div>\n' +
+            '                                <!--完税证明-->\n' +
+            '                                <div class="show-table-content-03-t2-fl fl"><a href="#">完税证明</a></div>\n' +
+            '                            </div>\n' +
+            '                            <div class="show-table-content-03-t2 clearfix">\n' +
+            '\n' +
+            '                                <div class="show-cz fl">销售总额:</div>\n' +
+            '                                <div class="show-cz01 fl"></div>\n' +
+            '                                <div class="show-cz fl">增税值:</div>\n' +
+            '                                <div class="show-cz01 fl"></div>\n' +
+            '                                <div class="show-cz fl">企业所得税:</div>\n' +
+            '                                <div class="show-cz01 fl"></div>\n' +
+            '                                <div class="show-cz fl">申领金额:</div>\n' +
+            '                                <div class="show-cz01 fl"></div>\n' +
+            '                                <div class="show-cz fl">补助区间:</div>\n' +
+            '                                <div class="show-cz01 fl"></div>\n' +
+            '                                <div class="show-cz fl"></div>\n' +
+            '                                <div class="show-cz01 fl"></div>\n' +
+            '                            </div>\n' +
+            '                        </div>\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '        </div>';
+
+        var infoWindow = new BMap.InfoWindow(sContent);// 创建信息窗口对象
+        map.openInfoWindow(infoWindow, map.getCenter());      // 打开信息窗口
+
+
+
+
+    }
+
+
+
+</script>
+<script>
+    function earchts() {
+        var myChart = echarts.init(document.getElementById('main'));
+        console.log(document.getElementById('main'));
+        app.title = '坐标轴刻度与标签对齐';
+
+        option = {
+            color: ['#3398DB'],
+            tooltip : {
+                trigger: 'axis',
+                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    name:'直接访问',
+                    type:'bar',
+                    barWidth: '60%',
+                    data:[10, 52, 200, 334, 390, 330, 220]
+                }
+            ]
+        };
+
+        myChart.setOption(option);
+    }
+</script>
+
+</body>
+</html>
