@@ -2,7 +2,7 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="b80c1f88-44f0-4278-b933-5d8c14d93b18" name="zlzl" url="http://192.168.3.125:8082/html">
+      <webServer id="b80c1f88-44f0-4278-b933-5d8c14d93b18" name="zlzl" url="http://192.168.3.7:8082/html">
         <fileTransfer port="0" mountedRoot="F:\ZKY\ZKY\电商12.19\ds\html" accessType="MOUNT" />
       </webServer>
     </option>

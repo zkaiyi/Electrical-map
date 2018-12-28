@@ -7,10 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/nav-02.css" />
-    <link rel="stylesheet" href="css/index.css" />
     <script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
     <script src="js/vue.min.js"></script>
-    <title>首页</title>
+    <title>电商企业</title>
 </head>
 <body>
 <div class="container" id="app">
@@ -23,12 +22,12 @@
     <div class="left-nav">
         <div class="left-nav-container">
 
-            <div class="nav nav-a nav-a1"><a href="index.html">
-                <div class="nav-t1"><img class="nav-t1-img" src="images/nav-01-a.png" /></div>
+            <div class="nav"><a href="index.html">
+                <div class="nav-t1"><img class="nav-t1-img" src="images/nav-01.png" /></div>
                 <div class="nav-t2">首页</div>
             </a></div>
-            <div class="nav"><a href="nav-02.html">
-                <div class="nav-t1"><img class="nav-t1-img" src="images/nav-02.png" /></div>
+            <div class="nav nav-a nav-a1"><a href="nav-02.html">
+                <div class="nav-t1"><img class="nav-t1-img" src="images/nav-02-a.png" /></div>
                 <div class="nav-t2">电商企业</div>
             </a></div>
             <div class="nav"><a>
@@ -53,24 +52,104 @@
         </div>
         <!--漂浮窗-->
         <div class="Floating">
-            <!--头部类型-->
-            <div class="Floating-title clearfix">
-                <div class="Floating-title-01 Floating-title-01- fl Floating-title-01-a">电商企业<br>(255)</div>
-                <div class="Floating-title-01 Floating-title-02- fl">服务外包企业<br>(120)</div>
-                <div class="Floating-title-01 Floating-title-03- fl">软件服务技术<br>(50)</div>
-                <div class="Floating-title-01 Floating-title-04- fl">其他<br>(85)</div>
-            </div>
+            <div class="Floating-container">
+                <!--筛选模块-->
+                <div class="sift-container">
+                    <div class="sift-item">
+                        <!--一组-->
+                        <div class="list">
+                            <div class="list-01 clearfix">
+                                <div class="list-01-fl fl">销售总额区间</div>
+                                <div class="list-01-fr fr"><img class="list-01-fr-img" src="images/index-down.png" /></div>
+                            </div>
+                            <div class="list-02  clearfix">
+                                <div class="list-02-t fl"><span class="span-01 span-01a">0-10万</span>、</div>
+                                <div class="list-02-t fl"><span class="span-01">10-100万</span>、</div>
+                                <div class="list-02-t fl"><span class="span-01">100-300万</span>、</div>
+                                <div class="list-02-t fl"><span class="span-01">300-500万</span>、</div>
+                                <div class="list-02-t fl"><span class="span-01">500-1000万</span>、</div>
+                                <div class="list-02-t fl"><span class="span-01">1000万以上</span>、</div>
+                            </div>
+                        </div>
+                        <!--一组 结束-->
+                        <div class="list">
+                            <div class="list-01 clearfix">
+                                <div class="list-01-fl fl">纳税总额区间</div>
+                                <div class="list-01-fr fr"><img class="list-01-fr-img" src="images/index-down.png" /></div>
+                            </div>
+                            <div class="list-02 hide clearfix">
+                                <div class="list-02-t fl"><span class="span-01">0-10万</span>、</div>
+                                <div class="list-02-t fl"><span class="span-01">10-100万</span>、</div>
+                                <div class="list-02-t fl"><span class="span-01">100-300万</span>、</div>
+                                <div class="list-02-t fl"><span class="span-01">300-500万</span>、</div>
+                                <div class="list-02-t fl"><span class="span-01">500-1000万</span>、</div>
+                                <div class="list-02-t fl"><span class="span-01">1000万以上</span>、</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sift-btn clearfix">
+                        <div class="sift-btn-fl fl">报表异常（33）</div>
+                        <div class="sift-btn-fl sift-btn-fr fr">报表异常（09）</div>
+                    </div>
+                </div>
+                <!--数据加分页-->
+                <div class="fy-container">
+                    <div class="fy-top">
+                        <!--一组-->
+                        <div class="fy-top-list clearfix">
+                            <div class="fy-top-list-fl fl">1</div>
+                            <div class="fy-top-list-fr fr">
+                                <div class="fy-top-list-fr-01">宁波君灵模具技术有限公司</div>
+                                <div class="fy-top-list-fr-02">地 址：宁波市北仑区大碶官塘河路36号</div>
+                            </div>
+                        </div>
+                        <!--一组 结束-->
+                        <div class="fy-top-list clearfix">
+                            <div class="fy-top-list-fl fl">2</div>
+                            <div class="fy-top-list-fr fr">
+                                <div class="fy-top-list-fr-01">宁波君灵模具技术有限公司</div>
+                                <div class="fy-top-list-fr-02">地 址：宁波市北仑区大碶官塘河路36号</div>
+                            </div>
+                        </div>
+                        <div class="fy-top-list clearfix">
+                            <div class="fy-top-list-fl fl">3</div>
+                            <div class="fy-top-list-fr fr">
+                                <div class="fy-top-list-fr-01">宁波君灵模具技术有限公司</div>
+                                <div class="fy-top-list-fr-02">地 址：宁波市北仑区大碶官塘河路36号</div>
+                            </div>
+                        </div>
+                        <div class="fy-top-list clearfix">
+                            <div class="fy-top-list-fl fl">4</div>
+                            <div class="fy-top-list-fr fr">
+                                <div class="fy-top-list-fr-01">宁波君灵模具技术有限公司</div>
+                                <div class="fy-top-list-fr-02">地 址：宁波市北仑区大碶官塘河路36号</div>
+                            </div>
+                        </div>
+                        <div class="fy-top-list clearfix">
+                            <div class="fy-top-list-fl fl">5</div>
+                            <div class="fy-top-list-fr fr">
+                                <div class="fy-top-list-fr-01">宁波君灵模具技术有限公司</div>
+                                <div class="fy-top-list-fr-02">地 址：宁波市北仑区大碶官塘河路36号</div>
+                            </div>
+                        </div>
+                        <div class="fy-top-list clearfix">
+                            <div class="fy-top-list-fl fl">6</div>
+                            <div class="fy-top-list-fr fr">
+                                <div class="fy-top-list-fr-01">宁波君灵模具技术有限公司</div>
+                                <div class="fy-top-list-fr-02">地 址：宁波市北仑区大碶官塘河路36号</div>
+                            </div>
+                        </div>
 
-            <!--商圈销售总额分析-->
-            <div class="area-table">
-                <div class="area-table-title">各商圈销售总额分析</div>
-                <div id="table02"></div>
-            </div>
-
-            <!--商圈税额占比分析图-->
-            <div class="se-table">
-                <div class="se-table-title">各商圈税额占比分析图</div>
-                <div id="table03" style="height: 100%"></div>
+                    </div>
+                    <div class="fy-c clearfix">
+                        <div class="fy fy-f fy-no fl">上一页</div>
+                        <div class="fy fy-a fl">1</div>
+                        <div class="fy fl">2</div>
+                        <div class="fy fl">3</div>
+                        <div class="fy fl">4</div>
+                        <div class="fy fy-f fl">下一页</div>
+                    </div>
+                </div>
             </div>
         </div>
         <!--漂浮窗 结束-->
@@ -177,162 +256,19 @@
 
 
 <script src="js/jquery.min.js"></script>
-<script src="js/bane.js"></script>
-<script src="js/echarts.min.js"></script>
 <script>
-    // 浮窗标题
-    $(document).on("click",".Floating-title-01",function () {
-        if($(this).hasClass("Floating-title-01-a")){
+    // VUE框架
+    new Vue({
+        el: '#app',
+        data: {
 
-        }else {
-            $(this).addClass("Floating-title-01-a").siblings().removeClass("Floating-title-01-a")
         }
     });
 
-    // 商圈销售总额
-    var dom = document.getElementById("table02");
-    var myChart = echarts.init(dom);
-    var app = {};
-    option = null;
-    app.title = '折柱混合';
-
-    option = {
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'cross',
-                crossStyle: {
-                    color: '#999'
-                }
-            }
-        },
-        toolbox: {
-            feature: {
-                // dataView: {show: true, readOnly: false},
-                // magicType: {show: true, type: ['line', 'bar']},
-                // restore: {show: true},
-                // saveAsImage: {show: true}
-            }
-        },
-        legend: {
-            // data:['蒸发量','降水量','平均温度']
-        },
-        xAxis: [
-            {
-                type: 'category',
-                data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
-                axisPointer: {
-                    type: 'shadow'
-                }
-            }
-        ],
-        yAxis: [
-            {
-                type: 'value',
-                name: '水量',
-                min: 0,
-                max: 250,
-                interval: 50,
-                axisLabel: {
-                    formatter: '{value}'
-                }
-            },
-            {
-                type: 'value',
-                name: '温度',
-                min: 0,
-                max: 25,
-                interval: 5,
-                axisLabel: {
-                    formatter: '{value}'
-                }
-            }
-        ],
-        series: [
-            {
-                // name:'蒸发量',
-                type:'bar',
-                data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
-            },
-            {
-                // name:'降水量',
-                type:'bar',
-                data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
-            },
-            {
-                // name:'平均温度',
-                type:'line',
-                yAxisIndex: 1,
-                data:[2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
-            }
-        ]
-    };
-    ;
-    if (option && typeof option === "object") {
-        myChart.setOption(option, true);
-    }
 
 </script>
-<!--商圈税务-->
+<script src="js/bane.js"></script>
 <script>
-    var dom = document.getElementById("table03");
-    var myChart = echarts.init(dom);
-    var app = {};
-    option = null;
-    app.title = '环形图';
-
-    option = {
-        tooltip: {
-            trigger: 'item',
-            formatter: "{a} <br/>{b}: {c} ({d}%)"
-        },
-        legend: {
-            orient: 'vertical',
-            x: 'right'
-            // data:['工程（技术）中心','重点实验室','科技企业孵化室','众创空间','工程中心','搜索引擎']
-        },
-        series: [
-            {
-                name:'税额占比',
-                type:'pie',
-                radius: ['40%', '60%'],
-                avoidLabelOverlap: false,
-                label: {
-                    normal: {
-                        show: false,
-                        position: 'center'
-                    },
-                    emphasis: {
-                        show: true,
-                        textStyle: {
-                            fontSize: '16',
-                            fontWeight: 'bold'
-                        }
-                    }
-                },
-                labelLine: {
-                    normal: {
-                        show: false
-                    }
-                },
-                data:[
-                    {value:335, name:'工程（技术）中心'},
-                    {value:310, name:'重点实验室'},
-                    {value:234, name:'科技企业孵化室'},
-                    {value:135, name:'众创空间'},
-                    {value:748, name:'工程中心'},
-                    {value:748, name:'搜索引擎'},
-                ]
-            }
-        ]
-    };
-    ;
-    if (option && typeof option === "object") {
-        myChart.setOption(option, true);
-    }
-</script>
-<script>
-
     // 销售总额点击
     $(document).on("click",".list-02-t",function () {
         if($(this).find(".span-01").hasClass("span-01a")){
@@ -413,30 +349,19 @@
 
     
 </script>
-<!--地图-->
+
+<script src="js/echarts.min.js"></script>
+
 <script type="text/javascript">
     var map = new BMap.Map("dituContent");          // 创建地图实例
     var point = new BMap.Point(121.767688, 29.871121);  // 创建点坐标
     map.centerAndZoom(point, 17);                 // 初始化地图，设置中心点坐标和地图级别
     map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
-    var bdary = new BMap.Boundary(); //区域
 
-    bdary.get("宁波市", function(rs){       //获取行政区域
-        map.clearOverlays();        //清除地图覆盖物
-        var count = rs.boundaries.length; //行政区域的点有多少个
-        if (count === 0) {
-            alert('未能获取当前输入行政区域');
-            return ;
-        }
-        var pointArray = [];
-        for (var i = 0; i < count; i++) {
-            var ply = new BMap.Polygon(rs.boundaries[i], {strokeWeight: 2, strokeColor: "#ff0000"}); //建立多边形覆盖物
-            map.addOverlay(ply);  //添加覆盖物
-            pointArray = pointArray.concat(ply.getPath());
-        }
-        map.setViewport(pointArray);    //调整视野
-        addlabel();
-    });
+
+
+
+
 
 
 
@@ -551,14 +476,6 @@
 
 
     }
-
-
-
-
-
-
-
-
 
 
 

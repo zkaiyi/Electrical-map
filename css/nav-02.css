@@ -1,0 +1,95 @@
+/*地图*/
+.iw_poi_title {color:#CC5522;font-size:14px;font-weight:bold;overflow:hidden;padding-right:13px;white-space:nowrap}
+.iw_poi_content {font:12px arial,sans-serif;overflow:visible;padding-top:4px;white-space:-moz-pre-wrap;word-wrap:break-word}
+.anchorBL{display:none;}
+.map{width: 100%;height: 100%;}
+#dituContent{width: 100%;height: 100%;}
+/*漂浮窗*/
+.Floating{background-color: white;box-shadow: #cccccc 0 0 5px;border-radius: 10px;position: absolute;width:350px;height: 500px;top: 73px;left: 12px; }
+.Floating-container{width: 94%;margin: auto;}
+.list-01{width: 100%;background-color:#efefef; line-height: 30px;border-radius: 5px;margin-top: 10px;}
+.list-01:hover{cursor: pointer;}
+.list-01-fl{font-size: 16px;color: #1472c2;margin-left: 16px;}
+.list-01-fr-img{vertical-align: middle;margin-right: 10px;margin-top: -3px;}
+.list-02{width: 92%;margin-left: 6%;padding-top: 9px;}
+.list-02-t{font-size: 14px;color: #333333;line-height: 30px;}
+.span-01a{color: #c00a0a;}
+.sift-btn-fl{text-align: center;font-size: 14px;color: #ee1414;line-height: 38px;border: 1px solid #e8e8e8;border-radius: 10px;width: 146px;
+    background: #fdfdfd;
+    background: -moz-linear-gradient(top,#fdfdfd 0% ,#f0f1f0 100% );
+    background: -webkit-gradient(linear,left top , left bottom,color-stop(0% , #fdfdfd),color-stop(100% ,#f0f1f0 ));
+    background: -o-linear-gradient(top,  #fdfdfd 0%,#f0f1f0 100%);
+    background: -ms-linear-gradient(top,  #fdfdfd 0%,#f0f1f0 100%);
+    background: linear-gradient(to bottom,  #fdfdfd 0%,#f0f1f0 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fdfdfd', endColorstr='#f0f1f0',GradientType=0 );
+}
+:root .sift-btn-fl{filter:none;}
+.sift-btn-fl:hover{cursor: pointer;}
+.sift-btn-fr{color: #fbb121;}
+.list-02-t:hover{cursor: pointer;}
+.sift-btn{margin-top: 14px;}
+.fy-top{width: 284px;margin: auto;}
+.fy-top-list-fl{background: url("../images/index-address.png")  no-repeat;color: white;font-size: 14px;text-align: center;background-size: 100% 100%;line-height: 33px;width: 23px;}
+.fy-top-list-fr{width: 251px;font-size: 14px;color: #666666;margin-left: 10px;}
+.fy-container{margin-top: 40px;}
+.fy-top-list{margin-top: 16px;}
+.fy-top-list:hover{cursor: pointer;}
+.fy{width: 19px;height: 21px;border: 1px solid #e6ebef;text-align: center;font-size:12px;color: #337ab6;line-height: 21px;margin-left: 2.5px;margin-right: 2.5px; }
+.fy:hover{cursor: pointer;}
+.fy-a{background-color:#337ab6;color: white; }
+.fy-f{width: 48px;}
+.fy-no{color:#777777; }
+.fy-c{width: 214px;margin: auto;margin-top: 41px;}
+/*展示名片-地图信息窗口*/
+.show{background-color: white;position: relative;}
+.show-container{padding-left: 24px;padding-right: 24px;}
+.show-table-content{height: 138px;overflow-y: auto;}
+/*标题*/
+.show-title{font-size: 17px;line-height: 24px;color: #424242;}
+.show-t2{margin-top: 10px;}
+.show-t2-fl{width: 168px;height: 117px;}
+.show-t2-fl-img{width: 100%;height: 100%;}
+.show-t2-fr{margin-left: 13px;}
+.show-t2-fr-01{font-size: 14px;color: #333333;line-height: 100%;margin-top: 10px;}
+.show-t2-fr-01:first-child{margin-top: 0;}
+/*TAB标签*/
+.show-table{background-color: white;width: 457px;border: 1px solid #e9e9e9;margin-top: 8px;}
+.show-table-content-03-t1-fl{position: relative;}
+.show-table-content-03-t1-fl:hover{cursor: pointer;}
+.show-table-title{height: 38px;line-height: 38px;border-bottom: 1px solid #e9e9e9;}
+.show-table-title-fl{font-size: 15px;color: #333333;text-align: center;width: 33.33333333%;}
+.show-table-title-fl-a{background-color:#e9e8e8;}
+.show-table-title-fl:hover{cursor: pointer;}
+/*简介*/
+.show-table-content-01{padding: 10px 25px;}
+.show-table-content-01-t1{font-size: 12px;color:#333333;line-height: 16px; }
+/*季度报表*/
+.show-table-content-02-title{height: 30px;border-bottom: 1px solid #e9e9e9;width: 100%;line-height: 30px;position: relative;z-index: 5;}
+.show-table-content-02-title-fl{position: relative;font-size: 14px;color: #333333;margin-left: 22px;}
+.show-table-content-02-title-fl-t1{font-size: 14px;color: #333333;}
+.show-table-content-02-title-fr{margin-right: 13px;}
+.show-table-content-02-title-fl-t1-img{width: 12px;vertical-align: middle;margin-left: 7px;}
+.show-table-content-02-title-fl-t1:hover{cursor: pointer;}
+.show-table-content-02-title-fl-t2{height: 90px;overflow-y: auto;position: absolute;width:110px;text-align: center;background-color: white; border: 1px solid #e9e9e9;}
+.s-t-c-0-t-f-t-t{font-size: 12px;line-height: 24px;border-bottom: 1px solid #e9e9e9;}
+.show-table-content-02-title-fl-t2::-webkit-scrollbar {display:none}
+.s-t-c-0-t-f-t-t:last-child{border-bottom: none;}
+.s-t-c-0-t-f-t-t:hover{cursor: pointer;}
+#main{width: 416px;height:150px;margin: auto;position: absolute;top: -48px;}
+.show-table-content-02-main{position: relative;}
+/*政策申报表*/
+.show-table-content-03-t1{padding-left: 16px;}
+/*.show-table-content-03-t1-fl-t1{position: absolute;top: 0;left: 0;}*/
+.show-table-content-03-t1{border-bottom: 1px solid #e9e9e9;height: 29px;line-height: 29px;font-size: 13px;color: #333333;}
+.show-table-content-03-t1-fl-t-img{width: 10px;vertical-align: middle;margin-left: 5px;}
+.show-table-content-03-t2-fl a{text-decoration: none;color: #333;}
+.show-table-content-03-t1-fl{width: 75px;text-align: center;margin-left:3px;position: relative;}
+.show-table-content-03-t2-fl{width: 67px;height: 20px;line-height: 20px;background-color:#f6f6f6;border: 1px solid #e9e9e9;border-radius: 2px;text-align: center;    margin-top: 4px;margin-left: 35px;}
+.show-table-content-03-t1-fl-t1{height: 90px;overflow-y: auto;position: absolute;width:110px;text-align: center;background-color: white; border: 1px solid #e9e9e9;}
+.show-table-content-03-t1-fl-t1-t{font-size: 12px;line-height: 24px;border-bottom: 1px solid #e9e9e9;}
+.show-table-content-03-t1-fl-t1::-webkit-scrollbar {display:none}
+.show-table-content-03-t1-fl-t1-t:last-child{border-bottom: none;}
+.show-table-content-03-t1-fl-t1-t:hover{cursor: pointer;}
+.show-cz , .show-cz01{height: 29px;line-height: 29px;width:16.666666666666666%;text-align: center; border-bottom: 1px solid #e9e9e9;font-size: 12px;}
+.show-cz{background-color: white;}
+.show-cz01{background-color:#f6f6f6; }
