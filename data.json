@@ -1,0 +1,101 @@
+//首頁
+//企业类型(右边浮窗)
+//url:  url + "/type/enterprise"
+//type:post
+[{
+  "name":"电商企业",
+  "id":"1",
+  "num":"1"        //数量
+},{},{},{}]
+
+
+,
+
+//企业类型(图表分析)
+//url:  url + "/type/getenterprise"  + id(/type/enterprise>id)
+//type:get
+[{
+  "id":""
+  "market":[        //商圈销售总额
+    {
+      "name":"name"
+      "time":[{},{}],           //时间
+      "Average":[{},{}],        //平均值
+      "maney":[{},{}]            //销售额
+    }
+  ],
+  "revenue": [          //商圈税额
+    {
+      "name":"name"
+      "cname":[],         //企业名字
+      "crevenue":[]       //税额
+    }
+  ]
+}],
+
+//各个商圈显示-百度地图覆盖物
+//url:  url + "/map/stroke"
+//type:post
+[{
+  "id":"1"                 //商圈id
+  "name":"商圈1"           //商圈名字
+  "strokeColor":"#333"     //商圈覆盖物颜色
+  "range":[                //商圈范围
+    {
+            "long":"xxxx.xx",    //经度
+            "lat":"xxxxxxx"      //纬度
+            "maker":[            //商圈里面的各坐标点
+              {
+                "id":""
+                "icon":"",              //图标
+                "long":"xxxxxxxx",      //经度
+                "lat":"xxxxxxxx"        //纬度
+              }
+            ]
+
+    },{},{}
+  ],
+
+}],
+
+//点击商圈里面的坐标点-出现信息框(未完待续)--------------------------------------------------
+//url:  url + "/map/getstroke" + id(/map/stroke>range>maker.lengh>id)
+//type:get
+
+[{
+    "id":"",
+    "name":"name",
+    "img":"",
+    "address":"",
+    "money":"",
+    "revenue":"",
+    "unit":"",
+    "char":[
+      {
+              "title":"",
+              "year":[{
+                "yid":"",
+                "yname":"",
+                "money":[{},{}]
+              },{}]
+      }
+    ],
+    "char02":[
+      {
+              ""
+      }
+    ]
+}]
+
+
+
+
+
+
+
+
+
+
+
+
+
