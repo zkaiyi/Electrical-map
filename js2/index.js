@@ -109,7 +109,7 @@ $.ajax({
     dataType: "json",
     contentType: 'application/json',
     success:function (res) {
-        console.log(res);
+        // console.log(res);
         for(var i = 0;i<res.length;i++ ){
             var classa = "";
             if(i == 0){
@@ -147,7 +147,7 @@ function GetReportData(id) {
             var seriesList2 = [];
             var barList = res02.market;
             var pieList = res02.revenue;
-            console.log(pieList);
+            // console.log(pieList);
 
             for(var i=0;i<barList.length;i++){
                 var valueL = {};
@@ -177,7 +177,7 @@ function GetReportData(id) {
                 valueL3.name = name;
                 seriesList2.push(valueL3);
             }
-            console.log(seriesList2);
+            // console.log(seriesList2);
 
             myChart02.setOption({
                 series:[{

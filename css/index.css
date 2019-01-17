@@ -21,3 +21,29 @@
 .se-table-title{text-align: center;font-size: 17px;color: #3e3e3e;line-height: 100%; }
 .se-table{height: 365px;}
 #table03{height:90%;width: 100%;}
+
+/*0116 修改*/
+/*.show{position: absolute;top: 0;left: 500px;}*/
+.show{position: relative;}
+.show-table-content-03-t2-fl{
+     background-color: white;
+     border:none;
+     border-radius: 0;
+     text-align: left;
+    width: auto;}
+#main02 {
+    width: 416px;
+    height: 150px;
+    margin: auto;
+    position: absolute;
+    top: -48px;
+}
+.show-table-content-03-t2{position: relative;}
+.show-table-content-03-t1{position: relative;z-index: 555;}
+
+
+.marker{width: 10px;height: 10px;background-color: black;}
+
+/*0117*/
+.show-table-content-02-title{position: relative;z-index: 666;}
+#main{z-index: 4;}

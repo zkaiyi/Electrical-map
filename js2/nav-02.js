@@ -1,4 +1,9 @@
 // 获取公司列表
+// 初始状态
+sessionStorage.setItem("sellStart","");
+sessionStorage.setItem("sellEnd","");
+sessionStorage.setItem("payStart","");
+sessionStorage.setItem("payEnd","");
 GetCompanyList("1");
 function GetCompanyList(currentPage,sellStart,sellEnd,payStart,payEnd) {
     var json = {
@@ -9,13 +14,13 @@ function GetCompanyList(currentPage,sellStart,sellEnd,payStart,payEnd) {
         json.sellStart=sellStart;
     }
     if(sellEnd){
-        json.sellStart=sellEnd;
+        json.sellEnd=sellEnd;
     }
     if(payStart){
-        json.sellStart=payStart;
+        json.payStart=payStart;
     }
     if(payEnd){
-        json.sellStart=payEnd;
+        json.payEnd=payEnd;
     }
 
     $.ajax({
@@ -56,15 +61,11 @@ $(document).on("click",".fy-",function () {
        $(this).addClass("fy-a").siblings().removeClass("fy-a");
        var currentPage = $(this).text();
 
-       var sellStart =  sessionStorage.getItem("sellStart");
-       var sellEnd =  sessionStorage.getItem("sellEnd");
-       if(sellStart){
-           GetCompanyList(currentPage,sellStart,sellEnd);
-       }else {
-           GetCompanyList(currentPage);
-       }
-
-
+       var sellStart = sessionStorage.getItem("sellStart");
+       var sellEnd = sessionStorage.getItem("sellEnd");
+       var payStart = sessionStorage.getItem("payStart");
+       var payEnd = sessionStorage.getItem("payEnd");
+       GetCompanyList(currentPage,sellStart,sellEnd,payStart,payEnd);
    }
 });
 // 点击下一页
@@ -91,21 +92,18 @@ $(document).on("click",".fy-f02",function () {
 
         var currentPage = $(".fy-a").text();
 
-        var sellStart =  sessionStorage.getItem("sellStart");
-        var sellEnd =  sessionStorage.getItem("sellEnd");
-        if(sellStart){
-            GetCompanyList(currentPage,sellStart,sellEnd);
-        }else {
-            GetCompanyList(currentPage);
-        }
+
+        var sellStart = sessionStorage.getItem("sellStart");
+        var sellEnd = sessionStorage.getItem("sellEnd");
+        var payStart = sessionStorage.getItem("payStart");
+        var payEnd = sessionStorage.getItem("payEnd");
+        GetCompanyList(currentPage,sellStart,sellEnd,payStart,payEnd);
 
 
 
-        // GetCompanyList(currentPage);
+    },10);
 
-    },10)
-
-    if(page_now === page - 1){
+    if(page_now == page - 1){
         $(".fy-f02").removeClass("fy-f02").addClass("fy-no")
     }
 
@@ -135,17 +133,14 @@ $(document).on("click",".fy-f01-c",function () {
     setTimeout(function () {
         var currentPage = $(".fy-a").text();
 
-        var sellStart =  sessionStorage.getItem("sellStart");
-        var sellEnd =  sessionStorage.getItem("sellEnd");
-        if(sellStart){
-            GetCompanyList(currentPage,sellStart,sellEnd);
-        }else {
-            GetCompanyList(currentPage);
-        }
 
 
+        var sellStart = sessionStorage.getItem("sellStart");
+        var sellEnd = sessionStorage.getItem("sellEnd");
+        var payStart = sessionStorage.getItem("payStart");
+        var payEnd = sessionStorage.getItem("payEnd");
+        GetCompanyList(currentPage,sellStart,sellEnd,payStart,payEnd);
 
-        // GetCompanyList(currentPage);
 
     },10);
     if(page_now == "2"){
@@ -159,22 +154,25 @@ $(document).on("click",".fy-f01-c",function () {
 // 销售总额点击
 $(".list-02-sell").on("click",".list-02-t",function () {
     if($(this).find(".span-01").hasClass("span-01a")){
-    }else {
 
+    }else {
+        // $(this).find(".span-01").addClass("span-01a").siblings().removeClass("span-01a");
 
 
         $(this).find(".span-01").addClass("span-01a");
         $(this).siblings().find(".span-01").removeClass("span-01a");
-        var qs =$(this).find(".span-01").text().split("-");
-        var sellStart = qs[0];
-        var sellEnd = qs[1].split("万")[0];
+
+        var sellStart = $(this).find(".span-01").find(".sellStart").text();
+        var sellEnd = $(this).find(".span-01").find(".sellEnd").text();
         console.log(sellStart);
         console.log(sellEnd);
-        GetCompanyList("1",sellStart,sellEnd);
         sessionStorage.setItem("sellStart",sellStart);
         sessionStorage.setItem("sellEnd",sellEnd);
 
+        var payStart = sessionStorage.getItem("payStart");
+        var payEnd = sessionStorage.getItem("payEnd");
 
+        GetCompanyList("1",sellStart,sellEnd,payStart,payEnd);
 
 
 
@@ -183,20 +181,31 @@ $(".list-02-sell").on("click",".list-02-t",function () {
 
 // 纳税
 $(".list-02-pay").on("click",".list-02-t",function () {
-    if($(this).find(".span-01").hasClass("span-01a")){
-    }else {
-        $(this).find(".span-01").addClass("span-01a");
-        $(this).siblings().find(".span-01").removeClass("span-01a");
+
+    $(this).find(".span-01").addClass("span-01a");
+    $(this).siblings().find(".span-01").removeClass("span-01a");
 
 
-        var qs =$(this).find(".span-01").text().split("-");
-        var payStart = qs[0];
-        var payEnd = qs[1].split("万")[0];
-        console.log(payStart);
-        console.log(payEnd);
-        GetCompanyList("1",payStart,payEnd);
-        sessionStorage.setItem("payStart",payStart);
-        sessionStorage.setItem("payEnd",payEnd);
+    // $(this).find(".span-01").addClass("span-01a");
+    // $(this).siblings().find(".span-01").removeClass("span-01a");
 
-    }
+
+    var payStart = $(this).find(".span-01").find(".payStart").text();
+    var payEnd = $(this).find(".span-01").find(".payEnd").text();
+    console.log(payStart);
+    console.log(payEnd);
+    sessionStorage.setItem("payStart",payStart);
+    sessionStorage.setItem("payEnd",payEnd);
+
+    var sellStart = sessionStorage.getItem("sellStart");
+    var sellEnd = sessionStorage.getItem("sellEnd");
+
+    GetCompanyList("1",sellStart,sellEnd,payStart,payEnd);
+
+
+
+
+
+
+
 });
