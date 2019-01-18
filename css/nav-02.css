@@ -123,3 +123,21 @@
 .show-table-content-02-title-fl-t1{text-align: center;min-width: 110px;}
 .show-table-content-03-t1-fl-t1{max-height: 90px;height: auto;}
 .show-t2-fr-01{width: 276px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+
+
+/*0118*/
+.fy-container{padding-bottom: 20px;}
+.Floating-container-w{width: 350px;}
+
+
+.search_all{position: absolute;width: 346px;height:40px;line-height: 40px;background-color: rgba(255,255,255,0.5);right: 137px;top: 10px;border-radius: 5px;overflow: hidden; }
+.search_all_fl02{position: relative;}
+.search_all_fl{margin-left: 10px;}
+.search_all_fl-img{vertical-align: middle;width: 26px; }
+.search_all_fl02{width: 240px;margin-left: 10px;}
+.search_all_fl02_int{width: 100%;border: none;outline: none;line-height: 38px;background-color: transparent;font-size: 14px;color: #676767;}
+.search_all_fl03{width:56px;text-align: center; background-color: white;opacity: 1;font-size: 14px;color: #1494f5;cursor: pointer;}
+.search_all_fl03{cursor: pointer;}
+.top-nav{z-index: 666;}
+
+.search-down{position: absolute;width: 80px;text-align: center;height:40px;line-height: 40px;background-color: white;border-radius: 5px;overflow: hidden;right: 500px;top: 10px;}

@@ -31,3 +31,7 @@ button:hover{cursor: pointer;}
 .nav:hover .nav-t2{color:#337ab6; }
 /*主要内容布局*/
 .main{padding-top: 60px;margin-left: 101px;overflow-y: auto;position: relative;}
+
+
+.Floating{overflow:hidden;}
+.Floating-l{position: absolute;top: 0;left: 0;bottom: 0;right: -17px;overflow: auto;width: 367px;overflow-x: hidden;}

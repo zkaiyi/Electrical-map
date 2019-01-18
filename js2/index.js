@@ -23,7 +23,7 @@ option01 = {
     xAxis: [
         {
             type: 'category',
-            data: ['第一季度','第二季度','第三季度','第四季度'],
+            data: [],
             axisPointer: {
                 type: 'shadow'
             }
@@ -68,7 +68,7 @@ option02 = {
     },
     legend: {
         x: 'center',
-        top:"0%",
+        top:"-1%"
         // type: 'scroll'
     },
     series: [
@@ -143,29 +143,33 @@ function GetReportData(id) {
         dataType: "json",
         contentType: 'application/json',
         success: function (res02) {
+            console.log(res02);
             var seriesList = [];
             var seriesList2 = [];
-            var barList = res02.market;
+            var barList = res02.market.hjList;
+            var barList02 = res02.market.lshjList;
             var pieList = res02.revenue;
             // console.log(pieList);
 
-            for(var i=0;i<barList.length;i++){
-                var valueL = {};
-                var valueL2 = {};
-
-                var name = barList[i].name;
-                var money = barList[i].money;
-                var Average = barList[i].Average;
-                valueL.data = money;
-                valueL.type = 'bar';
-                valueL2.data = Average;
-                valueL2.type = 'line';
-                valueL2.yAxisIndex = 1;
-                seriesList.push(valueL);
-                seriesList.push(valueL2);
-            }
             myChart01.setOption({
-                series: seriesList
+                xAxis: [
+                    {
+                        data: res02.market.names
+                    }
+                ],
+                series:[
+                    {
+                        // name:'销售额',
+                        type:'bar',
+                        barWidth: '60%',
+                        data:barList
+                    },
+                    {
+                        // name:'税额',
+                        type:'line',
+                        data:barList02
+                    }
+                ]
             });
 
 

@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/nav-02.css" />
     <script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
-    <script src="js/vue.min.js"></script>
     <title>电商企业</title>
 </head>
 <body>
@@ -17,6 +16,13 @@
     <div class="top-nav clearfix">
         <div class="top-nav-fl fl"><img class="top-nav-fl-img" src="images/logo.jpg" />宁波电商城海曙园区信息统计系统</div>
         <div class="top-nav-fr fr" id="close"><img class="top-nav-fr-img" src="images/close.png" />关闭本页</div>
+
+        <div class="search_all clearfix">
+            <div class="search_all_fl fl"><img class="search_all_fl-img" src="images/search_all.png" /></div>
+            <div class="search_all_fl02 fl"><input class="search_all_fl02_int" placeholder="搜索您想要查找的内容" ></div>
+            <div class="search_all_fl03 fr">搜索</div>
+        </div>
+
     </div>
     <!--固定左边菜单栏目-->
     <div class="left-nav">
@@ -52,68 +58,72 @@
         </div>
         <!--漂浮窗-->
         <div class="Floating">
-            <div class="Floating-container">
-                <!--筛选模块-->
-                <div class="sift-container">
-                    <div class="sift-item">
-                        <!--一组-->
-                        <div class="list">
-                            <div class="list-01 clearfix">
-                                <div class="list-01-fl fl">销售总额区间</div>
-                                <div class="list-01-fr fr"><img class="list-01-fr-img" src="images/index-down.png" /></div>
+            <div class="Floating-l">
+                <div class="Floating-container-w">
+                    <div class="Floating-container">
+                        <!--筛选模块-->
+                        <div class="sift-container">
+                            <div class="sift-item">
+                                <!--一组-->
+                                <div class="list">
+                                    <div class="list-01 clearfix">
+                                        <div class="list-01-fl fl">销售总额区间</div>
+                                        <div class="list-01-fr fr"><img class="list-01-fr-img" src="images/index-down.png" /></div>
+                                    </div>
+                                    <div class="list-02 list-02-sell clearfix">
+                                        <div class="list-02-t fl"><span class="span-01"><span class="sellStart">0</span>-<span class="sellEnd">10</span>万</span>、</div>
+                                        <div class="list-02-t fl"><span class="span-01"><span class="sellStart">10</span>-<span class="sellEnd">100</span>万</span>、</div>
+                                        <div class="list-02-t fl"><span class="span-01"><span class="sellStart">100</span>-<span class="sellEnd">300</span>万</span>、</div>
+                                        <div class="list-02-t fl"><span class="span-01"><span class="sellStart">300</span>-<span class="sellEnd">500</span>万</span>、</div>
+                                        <div class="list-02-t fl"><span class="span-01"><span class="sellStart">500</span>-<span class="sellEnd">1000</span>万</span>、</div>
+                                        <div class="list-02-t fl"><span class="span-01 span-02"><span class="sellStart">1000</span>万以上</span></div>
+                                    </div>
+                                </div>
+                                <!--一组 结束-->
+                                <div class="list">
+                                    <div class="list-01 clearfix">
+                                        <div class="list-01-fl fl">纳税总额区间</div>
+                                        <div class="list-01-fr fr"><img class="list-01-fr-img" src="images/index-down.png" /></div>
+                                    </div>
+                                    <div class="list-02 list-02-pay  clearfix">
+                                        <div class="list-02-t fl"><span class="span-01"><span class="payStart">0</span>-<span class="payEnd">10</span>万</span>、</div>
+                                        <div class="list-02-t fl"><span class="span-01"><span class="payStart">10</span>-<span class="payEnd">100</span>万</span>、</div>
+                                        <div class="list-02-t fl"><span class="span-01"><span class="payStart">100</span>-<span class="payEnd">300</span>万</span>、</div>
+                                        <div class="list-02-t fl"><span class="span-01"><span class="payStart">300</span>-<span class="payEnd">500</span>万</span>、</div>
+                                        <div class="list-02-t fl"><span class="span-01"><span class="payStart">500</span>-<span class="payEnd">1000</span>万</span>、</div>
+                                        <div class="list-02-t fl"><span class="span-01"><span class="payStart">1000</span>万以上</span></div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="list-02 list-02-sell clearfix">
-                                <div class="list-02-t fl"><span class="span-01"><span class="sellStart">0</span>-<span class="sellEnd">10</span>万</span>、</div>
-                                <div class="list-02-t fl"><span class="span-01"><span class="sellStart">10</span>-<span class="sellEnd">100</span>万</span>、</div>
-                                <div class="list-02-t fl"><span class="span-01"><span class="sellStart">100</span>-<span class="sellEnd">300</span>万</span>、</div>
-                                <div class="list-02-t fl"><span class="span-01"><span class="sellStart">300</span>-<span class="sellEnd">500</span>万</span>、</div>
-                                <div class="list-02-t fl"><span class="span-01"><span class="sellStart">500</span>-<span class="sellEnd">1000</span>万</span>、</div>
-                                <div class="list-02-t fl"><span class="span-01 span-02"><span class="sellStart">1000</span>万以上</span>、</div>
+                            <div class="sift-btn clearfix">
+                                <div class="sift-btn-fl fl" id="bbyc">报表异常（<span class="bbyc"></span>）</div>
+                                <div class="sift-btn-fl sift-btn-fr fr" id="wwc">未完成申报（<span class="wwc"></span>）</div>
                             </div>
                         </div>
-                        <!--一组 结束-->
-                        <div class="list">
-                            <div class="list-01 clearfix">
-                                <div class="list-01-fl fl">纳税总额区间</div>
-                                <div class="list-01-fr fr"><img class="list-01-fr-img" src="images/index-down.png" /></div>
-                            </div>
-                            <div class="list-02 list-02-pay hide clearfix">
-                                <div class="list-02-t fl"><span class="span-01"><span class="payStart">0</span>-<span class="payEnd">10</span>万</span>、</div>
-                                <div class="list-02-t fl"><span class="span-01"><span class="payStart">10</span>-<span class="payEnd">100</span>万</span>、</div>
-                                <div class="list-02-t fl"><span class="span-01"><span class="payStart">100</span>-<span class="payEnd">300</span>万</span>、</div>
-                                <div class="list-02-t fl"><span class="span-01"><span class="payStart">300</span>-<span class="payEnd">500</span>万</span>、</div>
-                                <div class="list-02-t fl"><span class="span-01"><span class="payStart">500</span>-<span class="payEnd">1000</span>万</span>、</div>
-                                <div class="list-02-t fl"><span class="span-01"><span class="payStart">1000</span>万以上</span>、</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sift-btn clearfix">
-                        <div class="sift-btn-fl fl">报表异常（33）</div>
-                        <div class="sift-btn-fl sift-btn-fr fr">报表异常（09）</div>
-                    </div>
-                </div>
-                <!--数据加分页-->
-                <div class="fy-container">
-                    <div class="fy-top">
-                        <!--一组-->
-                        <!--<div class="fy-top-list clearfix">-->
-                            <!--<div class="fy-top-list-fl fl">1</div>-->
-                            <!--<div class="fy-top-list-fr fr">-->
+                        <!--数据加分页-->
+                        <div class="fy-container">
+                            <div class="fy-top">
+                                <!--一组-->
+                                <!--<div class="fy-top-list clearfix">-->
+                                <!--<div class="fy-top-list-fl fl">1</div>-->
+                                <!--<div class="fy-top-list-fr fr">-->
                                 <!--<div class="fy-top-list-fr-01">宁波君灵模具技术有限公司</div>-->
                                 <!--<div class="fy-top-list-fr-02">地 址：宁波市北仑区大碶官塘河路36号</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--一组 结束-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!--一组 结束-->
 
 
-                    </div>
-                    <div class="fy-c clearfix">
-                        <div class="fy fy-f fy-f01 fy-no fl">上一页</div>
-                        <div class="fy fy- fy-a fl">1</div>
-                        <div class="fy fy- fl">2</div>
-                        <div class="fy fy- fl">3</div>
-                        <div class="fy fy- fl">4</div>
-                        <div class="fy fy-f fy-f02 fl">下一页</div>
+                            </div>
+                            <div class="fy-c clearfix">
+                                <div class="fy fy-f fy-f01 fy-no fl">上一页</div>
+                                <div class="fy fy- fy-a fl">1</div>
+                                <div class="fy fy- fl">2</div>
+                                <div class="fy fy- fl">3</div>
+                                <div class="fy fy- fl">4</div>
+                                <div class="fy fy-f fy-f02 fl">下一页</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -281,16 +291,23 @@
                         console.log(res03);
                         var yearList = res03.yearSelect;
                         var btList = res03.typeResult;
-                        children03_bt = btList[0];
+                        if(btList.length == 0  ){
+                            children03_bt = "";
+                        }else {
+                            children03_bt = btList[0];
+
+                            for(var i=0;i<btList.length;i++){
+                                children03 +='<div class="show-table-content-03-t1-fl-t1-t" onclick="choose05(this)" data-chooesID="'+id+'" data-textId="'+btList[i]+'">'+btList[i]+'</div>';
+                            }
+                        }
+
                         sessionStorage.setItem("children03_bt",children03_bt);
 
 
                         for(var i=yearList.length-1;i>=0;i--){
                             children02 +='<div class="show-table-content-03-t1-fl-t1-t" onclick="choose04(this)" data-yearID="'+yearList[i]+'" data-chooesID="'+id+'">'+yearList[i]+'年</div>';
                         }
-                        for(var i=0;i<btList.length;i++){
-                            children03 +='<div class="show-table-content-03-t1-fl-t1-t" onclick="choose05(this)" data-chooesID="'+id+'" data-textId="'+btList[i]+'">'+btList[i]+'</div>';
-                        }
+
 
 
                     },

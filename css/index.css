@@ -47,3 +47,11 @@
 /*0117*/
 .show-table-content-02-title{position: relative;z-index: 666;}
 #main{z-index: 4;}
+.se-table {
+    height: 395px;
+}
+#table03{height:200%;padding-top:10px;}
+
+
+/*0118*/
+.Floating-title , .area-table , .se-table{width: 350px;}

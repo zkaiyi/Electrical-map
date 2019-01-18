@@ -2,7 +2,8 @@
 var scren=document.documentElement.clientHeight;
 $(".left-nav").css("height",scren - 60 + "px");
 $(".main").css("height",scren - 60 + "px");
-$(".Floating").css("height",scren - 60 - 13 -40 + "px");
+// $(".Floating").css("height",scren - 60 - 13 -40 + "px");
+$(".Floating").css("height",scren*0.88 + "px");
 // 主要内容的宽高
 
 // 鼠标滑过左边框
