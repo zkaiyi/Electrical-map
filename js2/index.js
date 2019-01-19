@@ -18,7 +18,7 @@ option01 = {
         }
     },
     legend: {
-        // data:['蒸发量','降水量','平均温度']
+        data:['销售总额','纳税总额']
     },
     xAxis: [
         {
@@ -32,8 +32,9 @@ option01 = {
     yAxis: [
         {
             type: 'value',
-            name: '',
+            name: '亿元',
             min: 0,
+            // interval:200000,
             // max: 250,
             // interval: 50,
             axisLabel: {
@@ -42,7 +43,7 @@ option01 = {
         },
         {
             type: 'value',
-            name: '',
+            name: '亿元',
             min: 0,
             // max: 25,
             // interval: 5,
@@ -118,7 +119,13 @@ $.ajax({
             var html = ' <div class="Floating-title-01 fl '+classa+'" data-typeId="'+res[i].id+'">'+res[i].name+'<br>('+res[i].num+')</div>';
             $(".Floating-title").append(html);
         }
-        GetReportData(res[0].id);
+        var csyear = sessionStorage.getItem("csyear");
+        GetReportData(res[0].id,csyear);
+
+        sessionStorage.setItem("QYDLid-01",res[0].id);
+        sessionStorage.setItem("QYDLid-02",res[1].id);
+        sessionStorage.setItem("QYDLid-03",res[2].id);
+        sessionStorage.setItem("QYDLid-04",res[3].id);
     },
     error:function (xml) {
         console.log(xml)
@@ -130,26 +137,82 @@ $(document).on("click",".Floating-title-01",function () {
     if($(this).hasClass("Floating-title-01-a")){
 
     }else {
-        $(this).addClass("Floating-title-01-a").siblings().removeClass("Floating-title-01-a")
+        $(this).addClass("Floating-title-01-a").siblings().removeClass("Floating-title-01-a");
         var id  = $(this).attr("data-typeId");
-        GetReportData(id);
+        var csyear = sessionStorage.getItem("csyear");
+        $(".area-table-down-fl").html(csyear + "年");
+        $(".csyear").html(csyear + "年");
+        GetReportData(id,csyear);
     }
 });
 // 图表分析01
-function GetReportData(id) {
+function GetReportData(id,year) {
+    var json66={
+        id:id
+    }
+    if(year){
+        json66.year = year;
+    }
+
     $.ajax({
         type: "get",
-        url: callurl + "/Company/GetReportData/" + id,
+        url: callurl + "/Company/GetReportData",
+        data:json66,
         dataType: "json",
         contentType: 'application/json',
         success: function (res02) {
             console.log(res02);
             var seriesList = [];
+            var seriesList02 = [];
             var seriesList2 = [];
             var barList = res02.market.hjList;
             var barList02 = res02.market.lshjList;
             var pieList = res02.revenue;
-            // console.log(pieList);
+
+            console.log(barList);
+            for(var i = 0; i<barList.length;i++){
+                var barListn =  barList[i];
+                var barListn02 = barListn.split(".")[0];
+                seriesList.push(barListn02);
+            }
+            console.log(seriesList);
+            var temp=false;
+            for(var i in seriesList){
+                if(seriesList[i].length>4){
+                    temp=true;
+                    break;
+                }
+            }
+
+            if(temp){
+                for(var i in seriesList){
+                    seriesList[i]=(seriesList[i]*0.0001).toFixed(2);
+                }
+            }
+
+            for(var i = 0; i<barList02.length;i++){
+                var barList02n =  barList02[i];
+                var barList02n02 = barList02n.split(".")[0];
+                seriesList02.push(barList02n02);
+            }
+
+            for(var i in seriesList02){
+                if(seriesList02[i].length>4){
+                    temp=true;
+                    break;
+                }
+            }
+
+            if(temp){
+                for(var i in seriesList02){
+                    seriesList02[i]=(seriesList02[i]*0.0001).toFixed(2);
+                }
+            }
+
+
+
+
+
 
             myChart01.setOption({
                 xAxis: [
@@ -159,15 +222,16 @@ function GetReportData(id) {
                 ],
                 series:[
                     {
-                        // name:'销售额',
+                        name:'销售总额',
                         type:'bar',
                         barWidth: '60%',
-                        data:barList
+                        data:seriesList
                     },
                     {
-                        // name:'税额',
+                        name:'纳税总额',
                         type:'line',
-                        data:barList02
+                        yAxisIndex: 1,
+                        data:seriesList02
                     }
                 ]
             });
@@ -181,8 +245,6 @@ function GetReportData(id) {
                 valueL3.name = name;
                 seriesList2.push(valueL3);
             }
-            // console.log(seriesList2);
-
             myChart02.setOption({
                 series:[{
                     data:seriesList2,
@@ -194,6 +256,89 @@ function GetReportData(id) {
     })
 }
 // 图表分析
+
+
+// 商圈下拉年份
+function sqdown(obj) {
+    if($(obj).siblings().hasClass("hide")){
+        $(obj).siblings().slideDown();
+        $(obj).siblings().removeClass("hide");
+    }else {
+        $(obj).siblings().slideUp();
+        $(obj).siblings().addClass("hide");
+    }
+}
+
+// 年份下拉内容
+var QYDLId = $(".Floating-title-01-a").attr("data-typeid");
+$.ajax({
+    url:callurl + "/Company/GetCompanyTypeYears?QYDLId=" + QYDLId,
+    type:"get",
+    success:function (res) {
+        $(".area-table-down-content").html("");
+
+        for(var i = 0;i<res.length;i++){
+            var  html = '<div class="area-table-down-content-01" data-year="'+res[i]+'" onclick="sqdownchoose(this)">'+res[i]+'</div>';
+            $(".area-table-down-content").append(html);
+            $(".csyear").html(res[0] + "年");
+            $(".area-table-down-fl").html(res[0] + "年");
+
+            sessionStorage.setItem("csyear",res[0])
+        }
+    },
+    error:function (xml) {
+        console.log(xml)
+    }
+
+});
+
+// 选择了年份之后
+function sqdownchoose(obj) {
+    var QYDLId = $(".Floating-title-01-a").attr("data-typeid");
+
+    var nf_vaule02 = $(obj).text();
+    $(obj).parent().siblings().find(".area-table-down-fl").html(nf_vaule02  +"年");
+     $(obj).parent().slideUp();
+     $(obj).parent().addClass("hide");
+
+
+    GetReportData(QYDLId,nf_vaule02);
+   $(".csyear").html(nf_vaule02);
+
+
+
+}
+
+
+$.ajax({
+    type:"get",
+    url:callurl +"Company/GetCompanyCountList",
+    dataType: "json",
+    success:function (res06) {
+        var typeId = res06[0].id;
+        console.log(typeId);
+
+
+        $(document).on("click",".nav",function () {
+            if($(this).index()>0){
+                console.log($(this).index());
+                window.location.href='nav-02.html?QYDLid=' + res06[$(this).index()-1].id
+            }
+        })
+
+
+
+
+
+    },
+    error:function () {
+
+    }
+});
+
+
+
+
 
 
 

@@ -39,7 +39,9 @@
 .fy-a{background-color:#337ab6;color: white; }
 .fy-f{width: 48px;}
 .fy-no{color:#777777; }
-.fy-c{width: 214px;margin: auto;margin-top: 41px;}
+.fy-c{
+    /*width: 214px;*/
+    margin: auto;margin-top: 41px;}
 /*展示名片-地图信息窗口*/
 .show{background-color: white;position: relative;}
 .show-container{padding-left: 24px;padding-right: 24px;}
@@ -141,3 +143,26 @@
 .top-nav{z-index: 666;}
 
 .search-down{position: absolute;width: 80px;text-align: center;height:40px;line-height: 40px;background-color: white;border-radius: 5px;overflow: hidden;right: 500px;top: 10px;}
+
+/*0119*/
+#main{height: 150px;top:-28px;}
+.fwnxx{    height: 32px;
+    line-height: 32px;
+    color: #333333;
+    margin: 0;
+    padding-left: 12px;font-size: 14px;
+
+}
+.fy-container{margin-top: 20px;}
+.fwnxx-span{color: #1472c2;}
+.show-table-content-01-t1-t-fl-02-{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.search_all-down{
+    height: auto;
+    position: fixed;width: 346px;top: 50px;    background-color: rgba(255,255,255,0.7);right: 137px;    color: #676767;font-size: 15px;overflow: auto;}
+.search_all-down-text{text-overflow: ellipsis;white-space: nowrap;width: 100%;}
+.search_all-down-text:hover{cursor: pointer;}
+.list-02-t-new{font-size: 14px;
+    color: #333333;
+    line-height: 30px;}
+.list-02-t-new:hover{cursor: pointer;}
+.list-02-t-new-a{color: #c00a0a;}

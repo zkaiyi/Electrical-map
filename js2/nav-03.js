@@ -1,14 +1,9 @@
 // 获取公司列表
 // 初始状态
-var QYDLidT = window.location.href.split("QYDLid=")[1];
-console.log(QYDLidT);
-if(QYDLidT){
-    sessionStorage.setItem("QYDLidT",QYDLidT)
-}else {
-    QYDLidT = "";
-    sessionStorage.setItem("QYDLidT","")
-}
 
+
+
+var QYDLid = sessionStorage.getItem("QYDLid-02");
 
 var fy_c_w = $(".fy-").length+1;
 $(".fy-c").css("width",fy_c_w * 21  + 165 + "px");
@@ -17,8 +12,8 @@ sessionStorage.setItem("sellStart","");
 sessionStorage.setItem("sellEnd","");
 sessionStorage.setItem("payStart","");
 sessionStorage.setItem("payEnd","");
-GetCompanyList("1","","","","",QYDLidT);
-function GetCompanyList(currentPage,sellStart,sellEnd,payStart,payEnd,QYDLidT) {
+GetCompanyList("1","","","","",QYDLid);
+function GetCompanyList(currentPage,sellStart,sellEnd,payStart,payEnd,QYDLid) {
     var json = {
         pageSize:"6",
         currentPage:currentPage
@@ -35,8 +30,8 @@ function GetCompanyList(currentPage,sellStart,sellEnd,payStart,payEnd,QYDLidT) {
     if(payEnd){
         json.payEnd=payEnd;
     }
-    if(QYDLidT){
-        json.QYDLidT=QYDLidT;
+    if(QYDLid){
+        json.QYDLid=QYDLid;
     }
 
     $.ajax({
@@ -115,7 +110,7 @@ $(document).on("click",".fy-",function () {
        var typeId = sessionStorage.getItem("typeId");
 
        if(sessionStorage.getItem("bb") == ""){
-           GetCompanyList(currentPage,sellStart,sellEnd,payStart,payEnd,QYDLidT);
+           GetCompanyList(currentPage,sellStart,sellEnd,payStart,payEnd);
        }
        if(sessionStorage.getItem("bb") == "yes01"){
            GetbbycList(currentPage,typeId);
@@ -159,10 +154,10 @@ $(document).on("click",".fy-f02",function () {
         var payEnd = sessionStorage.getItem("payEnd");
         // GetCompanyList(currentPage,sellStart,sellEnd,payStart,payEnd);
         if(sessionStorage.getItem("bb") == ""){
-            GetCompanyList(currentPage,sellStart,sellEnd,payStart,payEnd,QYDLidT);
+            GetCompanyList(currentPage,sellStart,sellEnd,payStart,payEnd);
         }
 
-        var typeId = sessionStorage.getItem("typeId");
+        var typeId = sessionStorage.getItem("QYDLid-02");
         if(sessionStorage.getItem("bb") == "yes01"){
             GetbbycList(currentPage,typeId);
         }
@@ -213,9 +208,9 @@ $(document).on("click",".fy-f01-c",function () {
         // GetCompanyList(currentPage,sellStart,sellEnd,payStart,payEnd);
 
         if(sessionStorage.getItem("bb") == ""){
-            GetCompanyList(currentPage,sellStart,sellEnd,payStart,payEnd,QYDLidT);
+            GetCompanyList(currentPage,sellStart,sellEnd,payStart,payEnd);
         }
-        var typeId = sessionStorage.getItem("typeId");
+        var typeId = sessionStorage.getItem("QYDLid-02");
         if(sessionStorage.getItem("bb") == "yes01"){
             GetbbycList(currentPage,typeId);
         }
@@ -256,7 +251,7 @@ $(".list-02-sell").on("click",".list-02-t",function () {
         var payStart = sessionStorage.getItem("payStart");
         var payEnd = sessionStorage.getItem("payEnd");
 
-        GetCompanyList("1",sellStart,sellEnd,payStart,payEnd,QYDLidT);
+        GetCompanyList("1",sellStart,sellEnd,payStart,payEnd);
 
         $(".fy-").eq(0).html("1").addClass("fy-a").siblings().removeClass("fy-a");
         $(".fy-").eq(1).html("2");
@@ -291,7 +286,7 @@ $(".list-02-pay").on("click",".list-02-t",function () {
     var sellStart = sessionStorage.getItem("sellStart");
     var sellEnd = sessionStorage.getItem("sellEnd");
 
-    GetCompanyList("1",sellStart,sellEnd,payStart,payEnd,QYDLidT);
+    GetCompanyList("1",sellStart,sellEnd,payStart,payEnd);
 
 
     $(".fy-").eq(0).html("1").addClass("fy-a").siblings().removeClass("fy-a");
@@ -319,7 +314,7 @@ $(".list-02-sell").on("click",".list-02-t-new",function () {
     sessionStorage.setItem("sellEnd","");
     var payStart = sessionStorage.getItem("payStart");
     var payEnd = sessionStorage.getItem("payEnd");
-    GetCompanyList("1","0","",payStart,payEnd,QYDLidT);
+    GetCompanyList("1","0","",payStart,payEnd);
 
 
 
@@ -340,7 +335,7 @@ $(".list-02-pay").on("click",".list-02-t-new",function () {
     sessionStorage.setItem("payEnd","");
     var sellStart = sessionStorage.getItem("sellStart");
     var sellEnd = sessionStorage.getItem("sellEnd");
-    GetCompanyList("1",sellStart,sellEnd,"0","",QYDLidT);
+    GetCompanyList("1",sellStart,sellEnd,"0","");
 
 
     $(".fy-").eq(0).html("1").addClass("fy-a").siblings().removeClass("fy-a");
@@ -351,14 +346,21 @@ $(".list-02-pay").on("click",".list-02-t-new",function () {
 });
 
 
+
+
+
+
+
+
+
 // 数据报表数量
 $.ajax({
     type:"get",
     url:callurl +"Company/GetCompanyCountList",
     dataType: "json",
     success:function (res06) {
-        var typeId = QYDLidT;
-
+        var typeId = res06[1].id;
+        console.log(typeId);
         // 获取报表异常
         $.ajax({
             type:"get",
@@ -371,23 +373,9 @@ $.ajax({
                 $("#wwc").attr("data-id",typeId);
             }
         })
-
-
-
-        $(document).on("click",".nav",function () {
-            if($(this).index()>0){
-                console.log($(this).index());
-                window.location.href='nav-02.html?QYDLid=' + res06[$(this).index()-1].id
-            }
-        })
-
-
-
-
-
     },
     error:function () {
-
+        
     }
 });
 // 点击报表异常方法
@@ -508,7 +496,7 @@ function GetbbycList(currentPage,typeId) {
 
 }
 
-// 报表未完成
+// 报表为完成
 function GetwwcbbList(currentPage,typeId) {
     var json = {
         pageSize:"6",

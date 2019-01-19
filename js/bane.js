@@ -64,4 +64,7 @@ $(".nav").hover(function () {
         var newnavAUrl = navAUrl.join("");
         $(this).children().find("img").attr("src",newnavAUrl);
     }
+});
+$(document).on("click","#close",function () {
+    window.close();
 })

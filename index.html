@@ -27,7 +27,7 @@
                 <div class="nav-t1"><img class="nav-t1-img" src="images/nav-01-a.png" /></div>
                 <div class="nav-t2">首页</div>
             </a></div>
-            <div class="nav"><a href="nav-02.html">
+            <div class="nav"><a>
                 <div class="nav-t1"><img class="nav-t1-img" src="images/nav-02.png" /></div>
                 <div class="nav-t2">电商企业</div>
             </a></div>
@@ -64,13 +64,26 @@
 
                 <!--商圈销售总额分析-->
                 <div class="area-table">
-                    <div class="area-table-title">各商圈销售总额分析</div>
+                    <div class=" area-table-down">
+                        <div class="area-table-down-title clearfix" onclick="sqdown(this)">
+                            <div class=" area-table-down-fl fl">2017年</div>
+                            <div class=" area-table-down-fr fr"><img class="area-table-down-fr-img" src="images/index-down.png"></div>
+                        </div>
+                        <div class="area-table-down-content hide" >
+                            <!--<div class="area-table-down-content-01" onclick="sqdownchoose(this)">2017年</div>-->
+                            <!--<div class="area-table-down-content-01" onclick="sqdownchoose(this)">2016年</div>-->
+                            <!--<div class="area-table-down-content-01" onclick="sqdownchoose(this)">2015年</div>-->
+                            <!--<div class="area-table-down-content-01" onclick="sqdownchoose(this)">2014年</div>-->
+                        </div>
+                    </div>
+                    <div class="area-table-title"><span class="csyear"></span>各商圈销售总额分析</div>
+
                     <div id="table02"></div>
                 </div>
 
                 <!--商圈税额占比分析图-->
                 <div class="se-table">
-                    <div class="se-table-title">各商圈税额占比分析图</div>
+                    <div class="se-table-title"><span class="csyear"></span>各商圈税额分析</div>
                     <div id="table03" style="height: 100%"></div>
                 </div>
             </div>
@@ -186,45 +199,35 @@
 <!--地图-->
 <script type="text/javascript">
     var map = new BMap.Map("dituContent");          // 创建地图实例
-    var point = new BMap.Point(121.530437, 29.903015); // 创建点坐标
-    map.centerAndZoom(point, 17);                 // 初始化地图，设置中心点坐标和地图级别
-    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
-
-    var styleJson ="";
-    $.ajax({
-        url:"js2/custom_map_config.json",
-        type:"get",
-        async:false,
-        success:function (res00) {
-            console.log(res00);
-            styleJson =res00;
-        },
-        error:function () {
-            
-        }
-    });
-
-    map.setMapStyleV2({styleJson:styleJson});
-
-
-
-    // var mapType1 = new BMap.MapTypeControl(
-    //     {
-    //         mapTypes: [BMAP_NORMAL_MAP,BMAP_HYBRID_MAP],
-    //         anchor: BMAP_ANCHOR_TOP_LEFT
-    //     }
-    // );
-    // map.addControl(mapType1);
-    // map.setCurrentCity("宁波市");
-
+    var point = new BMap.Point(121.524121,29.897272); // 创建点坐标
+    map.centerAndZoom(point, 16);                 // 初始化地图，设置中心点坐标和地图级别
     map.addControl(new BMap.MapTypeControl({
         mapTypes:[
             BMAP_NORMAL_MAP,
             BMAP_HYBRID_MAP
         ],
-        anchor: BMAP_ANCHOR_TOP_LEFT
-    }));
-    map.setCurrentCity("北京");
+        anchor: BMAP_ANCHOR_TOP_LEFT}));
+    map.setCurrentCity("宁波");
+
+
+    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+
+    // var styleJson ="";
+    // // 主题
+    // $.ajax({
+    //     url:"js2/custom_map_config.json",
+    //     type:"get",
+    //     async:false,
+    //     success:function (res00) {
+    //         styleJson =res00;
+    //     },
+    //     error:function () {
+    //     }
+    // });
+    //
+    // map.setMapStyleV2({styleJson:styleJson});
+
+
 
 
 
@@ -255,19 +258,43 @@
                 for(var l=0;l<innerPoint.length;l++){
                     var innerP0 = new BMap.Point(innerPoint[l].long,innerPoint[l].lat);
                     var marker = new BMap.Marker(innerP0,{icon:myIcon},"1");
+                    var opts = {
+                        position : innerP0,    // 指定文本标注所在的地理位置
+                        offset   : new BMap.Size(-20, 10)    //设置文本偏移量
+                    };
+                    var label = new BMap.Label(res[i].name, opts);
+
+
 
                 }
                 marker.customData = {"sqid":res[i].id};
+                marker.customData = {"sqname":res[i].name};
                 map.addOverlay(marker);           // 将标注添
-                console.log(marker);
+                // console.log(marker);
                 marker.addEventListener('click',function(e){
                     var point_n = new BMap.Point(e.point.lng,e.point.lat);
                     var id = e.target.customData.sqid;
-
+                    console.log(point_n);
                     getinform(id,point_n);
-
-
                 });
+
+
+                label.setStyle({
+                    color : "#333",
+                    border:"none",
+                    background:"transparent",
+                    fontSize : "14px",
+                    height : "20px",
+                    lineHeight : "20px",
+                    fontFamily:"微软雅黑"
+                });
+                map.addOverlay(label);
+
+
+
+
+
+
 
 
                 // 商圈轮廓
@@ -281,7 +308,7 @@
                 }
                 var ids0 = res[i].id;
                 ids.push(ids0);
-                var Poly = new BMap.Polygon(polygon, {fillColor:color,strokeColor:"#fff", strokeWeight:2, strokeOpacity:0.4});
+                var Poly = new BMap.Polygon(polygon, {fillColor:color,strokeColor:"#fff", strokeWeight:2, strokeOpacity:0.7});
                 Poly.customData = {"sqid":res[i].id};
                 map.addOverlay(Poly);
                 Poly.addEventListener('click',function(e){
@@ -293,7 +320,7 @@
                     getinform(id,point_n);
                     console.log(point_n);
                 });
-                console.log(Poly);
+                // console.log(Poly);
 
 
 
@@ -317,16 +344,12 @@
         }
         console.log(json02);
 
-
         if(type == "1"){
             $(".zsbje-dw").html("元")
         }
         if(type == "0"){
             $(".zsbje-dw").html("万元")
         }
-
-
-
 
         $.ajax({
             url:callurl + "Company/GetSSReportYearSelect",
@@ -335,15 +358,18 @@
             async:false,
             success:function (res03) {
 
+
                 $("#cznf").html("");
                 console.log(res03);
                 var yearList = res03.yearList;
                 // var btList = res03.typeResult;
                 sessionStorage.setItem("zcxldate",yearList[yearList.length-1]);
                 for(var i=yearList.length-1;i>=0;i--){
-                    var children02='<div class="show-table-content-03-t1-fl-t1-t" onclick="choose04(this)" data-yearID="'+yearList[i]+'" data-chooesID="'+id+'">'+yearList[i]+'年</div>';
+                    var children02='<div class="show-table-content-03-t1-fl-t1-t" onclick="choose04(this)" data-yearID="'+yearList[i]+'" data-chooesID="'+id+'">'+yearList[i]+'</div>';
                     $("#cznf").append(children02);
                 }
+
+
 
 
 
@@ -393,8 +419,8 @@
                     '                    <div class="show-t2-fl fl"><img class="show-t2-fl-img" src="http://hsds.haishu.gov.cn/xtsz/UploadFile/images/'+res.picPath+'"  onerror="this.src=\'images/index-map01.jpg\'"/></div>\n' +
                     '                    <div class="show-t2-fr fl">\n' +
                     '                        <div class="show-t2-fr-01" title="'+res.scName+'">商圈名称：'+res.scName+'</div>\n' +
-                    '                        <div class="show-t2-fr-01" title="'+res.simple+'">商圈简介：'+res.simple+'</div>\n' +
                     '                        <div class="show-t2-fr-01" title="'+res.address+'">商圈位置：'+res.address+'</div>\n' +
+                    '                        <div class="show-t2-fr-01" title="'+res.simple+'">入驻企业：'+res.simple+'</div>\n' +
                     '                        <div class="show-t2-fr-01">销售总额：'+res.hj+'</div>\n' +
                     '                        <div class="show-t2-fr-01">纳税总额：'+res.lshj+'</div>\n' +
                     '                    </div>\n' +
@@ -501,7 +527,8 @@
             ],
             yAxis : [
                 {
-                    type : 'value'
+                    type : 'value',
+                    name: '万'
                 }
             ],
             series : [
@@ -570,10 +597,6 @@
 
 
     }
-
-
-
-
     function earchts02(yearId,year,type) {
 
         var myChart02 = echarts.init(document.getElementById('main02'));
@@ -598,6 +621,9 @@
                     data : [],
                     axisTick: {
                         alignWithLabel: true
+                    },
+                    axisLabel:{
+                        interval: 0
                     }
                 }
             ],
@@ -633,7 +659,11 @@
             json04.type=type;
         }
 
-        console.log()
+      if(type == "0"){
+        $(".show-table-content-03-t2-fl").addClass("hide");
+      }else {
+          $(".show-table-content-03-t2-fl").removeClass("hide");
+      }
 
         $.ajax({
             url:callurl + "Company/GetSSFZReport",
@@ -654,7 +684,7 @@
 
                     series : [
                         {
-                            name:'税额',
+                            name:'企业个数',
                             type:'line',
                             data:res021.yzb
                         }
@@ -729,14 +759,19 @@
     // 点击筛选政策申报表年份
     function choose04(obj) {
         var nf_vaule02 = $(obj).text();
-        $(obj).parent().siblings().find("span").html(nf_vaule02);
+        $(obj).parent().siblings().find("span").html(nf_vaule02 + "年");
         $(".show-table-content-03-t1-fl-t1").slideUp();
         $(".show-table-content-03-t1-fl-t1").addClass("hide");
 
         var year = $(obj).attr("data-yearID");
         var yearId = $(obj).attr("data-chooesid");
 
-        earchts02(yearId);
+        sessionStorage.setItem("zcxldate02",nf_vaule02);
+
+
+
+
+        earchts02(yearId,nf_vaule02);
 
     }
 
@@ -750,7 +785,14 @@
 
         var id = $(obj).attr("data-id");
         var type = $(obj).attr("data-type");
-        earchts02(id,"2017",type);
+        if(sessionStorage.getItem("zcxldate")){
+            if(sessionStorage.getItem("zcxldate02")){
+                earchts02(id,sessionStorage.getItem("zcxldate02"),type);
+            }else {
+                earchts02(id,sessionStorage.getItem("zcxldate"),type);
+            }
+        }
+
         zcxl(id,type);
 
 

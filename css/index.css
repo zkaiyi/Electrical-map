@@ -50,8 +50,32 @@
 .se-table {
     height: 395px;
 }
-#table03{height:200%;padding-top:10px;}
+#table03{height:200%;padding-top:30px;}
 
 
 /*0118*/
 .Floating-title , .area-table , .se-table{width: 350px;}
+
+/*0119*/
+.area-table-title , .se-table-title{font-weight: bold;}
+/*年份下拉*/
+.area-table-title{margin-top: 10px;}
+#table02{height:100%;margin-top: -30px;width: 90%;}
+.area-table{height: 280px;}
+.se-table-title{margin-top: 10px;}
+.area-table-down{      background-color: #efefef;position: relative;line-height: 30px;border-radius: 5px;margin-top: 10px;  width: 30%;margin-left: 1%;}
+.area-table-down-fl{    font-size: 16px;color: #1472c2;margin-left: 16px;}
+.area-table-down-fr-img{    vertical-align: middle;margin-right: 10px;margin-top: -3px;}
+.area-table-down-content{position: absolute;left: 0;width: 99%;top: 28px;background-color: white;color: #333;font-size: 12px;text-align: center;height: auto;}
+.area-table-down-content-01{line-height: 26px;border-bottom: 1px solid #cccccc;}
+.area-table-down-content{border: 1px solid #cccccc;border-bottom: none;border-top: none;z-index: 555;}
+.area-table-down-title:hover{cursor: pointer;}
+.area-table-down-content-01:hover{cursor: pointer;}
+.show-table-content-02-title{border-bottom: none;}
+#table02{margin-top: 10px;}
+.se-table{margin-top: 50px;}
+
+.Floating{width: 400px; }
+.Floating-l{width: 417px;}
+.Floating-title, .area-table, .se-table{width: 400px;}
+#table02{width: 100%;}

@@ -5,6 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/OverlayScrollbars.css" />
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/nav-02.css" />
     <script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
@@ -21,6 +22,16 @@
             <div class="search_all_fl fl"><img class="search_all_fl-img" src="images/search_all.png" /></div>
             <div class="search_all_fl02 fl"><input class="search_all_fl02_int" placeholder="搜索您想要查找的内容" ></div>
             <div class="search_all_fl03 fr">搜索</div>
+            <div class="search_all-down hide">
+                <!--<div class="search_all-down-text">余姚市第一人民医院</div>-->
+                <!--<div class="search_all-down-text">余姚市第一人民医院</div>-->
+                <!--<div class="search_all-down-text">余姚市第一人民医院</div>-->
+                <!--<div class="search_all-down-text">余姚市第一人民医院</div>-->
+                <!--<div class="search_all-down-text">余姚市第一人民医院</div>-->
+                <!--<div class="search_all-down-text">余姚市第一人民医院</div>-->
+                <!--<div class="search_all-down-text">余姚市第一人民医院</div>-->
+                <!--<div class="search_all-down-text">余姚市第一人民医院</div>-->
+            </div>
         </div>
 
     </div>
@@ -32,7 +43,7 @@
                 <div class="nav-t1"><img class="nav-t1-img" src="images/nav-01.png" /></div>
                 <div class="nav-t2">首页</div>
             </a></div>
-            <div class="nav nav-a nav-a1"><a href="nav-02.html">
+            <div class="nav nav-a nav-a1"><a>
                 <div class="nav-t1"><img class="nav-t1-img" src="images/nav-02-a.png" /></div>
                 <div class="nav-t2">电商企业</div>
             </a></div>
@@ -71,6 +82,7 @@
                                         <div class="list-01-fr fr"><img class="list-01-fr-img" src="images/index-down.png" /></div>
                                     </div>
                                     <div class="list-02 list-02-sell clearfix">
+                                        <div class="list-02-t-new fl">全部、</div>
                                         <div class="list-02-t fl"><span class="span-01"><span class="sellStart">0</span>-<span class="sellEnd">10</span>万</span>、</div>
                                         <div class="list-02-t fl"><span class="span-01"><span class="sellStart">10</span>-<span class="sellEnd">100</span>万</span>、</div>
                                         <div class="list-02-t fl"><span class="span-01"><span class="sellStart">100</span>-<span class="sellEnd">300</span>万</span>、</div>
@@ -86,6 +98,7 @@
                                         <div class="list-01-fr fr"><img class="list-01-fr-img" src="images/index-down.png" /></div>
                                     </div>
                                     <div class="list-02 list-02-pay  clearfix">
+                                        <div class="list-02-t-new fl">全部、</div>
                                         <div class="list-02-t fl"><span class="span-01"><span class="payStart">0</span>-<span class="payEnd">10</span>万</span>、</div>
                                         <div class="list-02-t fl"><span class="span-01"><span class="payStart">10</span>-<span class="payEnd">100</span>万</span>、</div>
                                         <div class="list-02-t fl"><span class="span-01"><span class="payStart">100</span>-<span class="payEnd">300</span>万</span>、</div>
@@ -102,6 +115,7 @@
                         </div>
                         <!--数据加分页-->
                         <div class="fy-container">
+                            <div class="fwnxx hide">范围内共找到<span class="fwnxx-span"></span>条信息</div>
                             <div class="fy-top">
                                 <!--一组-->
                                 <!--<div class="fy-top-list clearfix">-->
@@ -112,8 +126,6 @@
                                 <!--</div>-->
                                 <!--</div>-->
                                 <!--一组 结束-->
-
-
                             </div>
                             <div class="fy-c clearfix">
                                 <div class="fy fy-f fy-f01 fy-no fl">上一页</div>
@@ -121,6 +133,8 @@
                                 <div class="fy fy- fl">2</div>
                                 <div class="fy fy- fl">3</div>
                                 <div class="fy fy- fl">4</div>
+                                <div class="fy fy-01 fl">…</div>
+                                <div class="fy fy-02 fl">7</div>
                                 <div class="fy fy-f fy-f02 fl">下一页</div>
                             </div>
                         </div>
@@ -169,7 +183,8 @@
         $("#jdbb").siblings().removeClass("show-table-title-fl-a");
 
         var gsid = $("#jdbb").attr("data-id");
-        earchts(gsid)
+        var Csjjbbxl = sessionStorage.getItem("Csjjbbxl");
+        earchts(gsid,Csjjbbxl);
 
         // 清除生报表年份选择
         sessionStorage.removeItem("sbb-year");
@@ -184,9 +199,9 @@
         $("#zcsbb_c").siblings().addClass("hide");
         $("#zcsbb").addClass("show-table-title-fl-a");
         $("#zcsbb").siblings().removeClass("show-table-title-fl-a");
-
+        var Csjjbbxl02 = sessionStorage.getItem("Csjjbbxl02");
         var gsid = $("#zcsbb").attr("data-id");
-        sbbdata(gsid)
+        sbbdata(gsid,Csjjbbxl02)
 
 
     }
@@ -222,8 +237,8 @@
 <script src="js2/nav-02.js"></script>
 <script type="text/javascript">
     var map = new BMap.Map("dituContent");          // 创建地图实例
-    var point = new BMap.Point(121.626272,29.865533);  // 创建点坐标
-    map.centerAndZoom(point, 15);                 // 初始化地图，设置中心点坐标和地图级别
+    var point = new BMap.Point(121.524121,29.897272);  // 创建点坐标
+    map.centerAndZoom(point, 16);                 // 初始化地图，设置中心点坐标和地图级别
     map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
 
 
@@ -273,6 +288,7 @@
                     async:false,
                     success:function (res02) {
                         console.log(res02);
+                        sessionStorage.setItem("Csjjbbxl",res02[res02.length-1]);
                         for(var i=res02.length-1;i>=0;i--){
                             children +='<div class="s-t-c-0-t-f-t-t" onclick="choose02(this)" data-yearID="'+res02[i]+'" data-chooesID="'+id+'">'+res02[i]+'年</div>';
                         }
@@ -303,12 +319,10 @@
 
                         sessionStorage.setItem("children03_bt",children03_bt);
 
-
+                        sessionStorage.setItem("Csjjbbxl02",yearList[yearList.length-1]);
                         for(var i=yearList.length-1;i>=0;i--){
                             children02 +='<div class="show-table-content-03-t1-fl-t1-t" onclick="choose04(this)" data-yearID="'+yearList[i]+'" data-chooesID="'+id+'">'+yearList[i]+'年</div>';
                         }
-
-
 
                     },
                     error:function (xml) {
@@ -327,7 +341,7 @@
                     '                        <div class="show-t2-fr-01" title="'+res.QYMC+'">企业名称：'+res.QYMC+'</div>\n' +
                     '                        <div class="show-t2-fr-01" title="'+res.SSJD+'">所&nbsp;在&nbsp;&nbsp;地：'+res.SSJD+'</div>\n' +
                     '                        <div class="show-t2-fr-01">企业法人：'+res.QYFR+'</div>\n' +
-                    '                        <div class="show-t2-fr-01">联系电话：'+res.LXDH+'</div>\n' +
+                    '                        <div class="show-t2-fr-01">法人电话：'+res.QYFRDH+'</div>\n' +
                     '                        <div class="show-t2-fr-01">登记时间：'+res.rkrq+'</div>\n' +
                     '                    </div>\n' +
                     '                </div>\n' +
@@ -348,10 +362,10 @@
                     '                                    <div class="show-table-content-01-t1-t-fl-02 show-table-content-01-t1-t-fl-04- fl">'+res.TYXYDM+'</div>\n' +
                     '                                </div>\n' +
                     '                                <div class="show-table-content-01-t1-t clearfix">\n' +
-                    '                                    <div class="show-table-content-01-t1-t-fl-01 show-table-content-01-t1-t-fl-01- fl">法人电话：</div>\n' +
-                    '                                    <div class="show-table-content-01-t1-t-fl-02 show-table-content-01-t1-t-fl-02- fl">'+res.QYFRDH+'</div>\n' +
-                    '                                    <div class="show-table-content-01-t1-t-fl-01 show-table-content-01-t1-t-fl-03- fl">组织机构代码：</div>\n' +
-                    '                                    <div class="show-table-content-01-t1-t-fl-02 show-table-content-01-t1-t-fl-04- fl">'+res.TYXYDM+'</div>\n' +
+                    '                                    <div class="show-table-content-01-t1-t-fl-01 show-table-content-01-t1-t-fl-01- fl">联系电话：</div>\n' +
+                    '                                    <div class="show-table-content-01-t1-t-fl-02 show-table-content-01-t1-t-fl-02- fl">'+res.LXDH+'</div>\n' +
+                    '                                    <div class="show-table-content-01-t1-t-fl-01 show-table-content-01-t1-t-fl-03- fl">所属大厦：</div>\n' +
+                    '                                    <div class="show-table-content-01-t1-t-fl-02 show-table-content-01-t1-t-fl-04- fl" title="'+res.ssds+'">'+res.ssds+'</div>\n' +
                     '                                </div>\n' +
                     '                                <div class="show-table-content-01-t1-t clearfix">\n' +
                     '                                    <div class="show-table-content-01-t1-t-fl-01 show-table-content-01-t1-t-fl-01- fl">企业类型：</div>\n' +
@@ -365,12 +379,6 @@
                     '                                    <div class="show-table-content-01-t1-t-fl-01 show-table-content-01-t1-t-fl-03- fl">注册资金币种：</div>\n' +
                     '                                    <div class="show-table-content-01-t1-t-fl-02 show-table-content-01-t1-t-fl-04- fl">'+res.ZCZJ_bz+'</div>\n' +
                     '                                </div>\n' +
-                    '                                <div class="show-table-content-01-t1-t clearfix">\n' +
-                    '                                    <div class="show-table-content-01-t1-t-fl-01 show-table-content-01-t1-t-fl-01- fl">所属大厦：</div>\n' +
-                    '                                    <div class="show-table-content-01-t1-t-fl-02 show-table-content-01-t1-t-fl-02- fl" title="'+res.ssds+'">'+res.ssds+'</div>\n' +
-                    '                                    <div class="show-table-content-01-t1-t-fl-01 show-table-content-01-t1-t-fl-03- fl">企业名称：</div>\n' +
-                    '                                    <div class="show-table-content-01-t1-t-fl-02 show-table-content-01-t1-t-fl-04- fl" title="'+res.QYMC+'">'+res.QYMC+'</div>\n' +
-                    '                                </div>' +
                     '                           </div>\n' +
                     '                        </div>\n' +
                     '                        <!--季度报表-->\n' +
@@ -466,7 +474,9 @@
             ],
             yAxis : [
                 {
-                    type : 'value'
+                    type : 'value',
+                    name: '万'
+
                 }
             ],
             series : [
@@ -554,7 +564,7 @@
 
         var gsId = $(obj).attr("data-chooesid");
         var year = $(obj).attr("data-yearid");
-        sbbdata(gsId,year)
+        sbbdata(gsId,year);
         sessionStorage.setItem("sbb-year",year)
 
 
@@ -644,6 +654,14 @@
 
 
 
+</script>
+<script src="js/OverlayScrollbars.js"></script>
+<script>
+    $('.search_all-down').overlayScrollbars({
+        className : "os-theme-dark",
+        sizeAutoCapable : true,
+        paddingAbsolute : true
+    });
 </script>
 
 </body>
