@@ -18,7 +18,7 @@ sessionStorage.setItem("sellEnd","");
 sessionStorage.setItem("payStart","");
 sessionStorage.setItem("payEnd","");
 GetCompanyList("1","","","","",QYDLidT);
-function GetCompanyList(currentPage,sellStart,sellEnd,payStart,payEnd,QYDLidT) {
+function GetCompanyList(currentPage,sellStart,sellEnd,payStart,payEnd,QYDLId) {
     var json = {
         pageSize:"6",
         currentPage:currentPage
@@ -35,16 +35,17 @@ function GetCompanyList(currentPage,sellStart,sellEnd,payStart,payEnd,QYDLidT) {
     if(payEnd){
         json.payEnd=payEnd;
     }
-    if(QYDLidT){
-        json.QYDLidT=QYDLidT;
+    if(QYDLId){
+        json.QYDLId=QYDLId;
     }
+    console.log(json);
 
     $.ajax({
         url:callurl + "Company/GetCompanyList",
         type:"post",
         data:json,
         success:function (res) {
-
+console.log(res);
 
             $(".fwnxx-span").html(res.amount);
             $(".fy-02").html(res.count);
