@@ -260,7 +260,7 @@
                     var marker = new BMap.Marker(innerP0,{icon:myIcon},"1");
                     var opts = {
                         position : innerP0,    // 指定文本标注所在的地理位置
-                        offset   : new BMap.Size(-20, 10)    //设置文本偏移量
+                        offset   : new BMap.Size(-20, 15)    //设置文本偏移量
                     };
                     var label = new BMap.Label(res[i].name, opts);
 
@@ -282,11 +282,15 @@
                 label.setStyle({
                     color : "#333",
                     border:"none",
-                    background:"transparent",
+                    borderRadius:"5px",
+                    background:"white",
                     fontSize : "14px",
                     height : "20px",
                     lineHeight : "20px",
-                    fontFamily:"微软雅黑"
+                    fontFamily:"微软雅黑",
+                    paddingLeft:"5px",
+                    paddingRight:"5px"
+
                 });
                 map.addOverlay(label);
 
@@ -420,7 +424,7 @@
                     '                    <div class="show-t2-fr fl">\n' +
                     '                        <div class="show-t2-fr-01" title="'+res.scName+'">商圈名称：'+res.scName+'</div>\n' +
                     '                        <div class="show-t2-fr-01" title="'+res.address+'">商圈位置：'+res.address+'</div>\n' +
-                    '                        <div class="show-t2-fr-01" title="'+res.simple+'">入驻企业：'+res.simple+'</div>\n' +
+                    '                        <div class="show-t2-fr-01" title="'+res.simple+'">入驻企业：'+res.simple+'家</div>\n' +
                     '                        <div class="show-t2-fr-01">销售总额：'+res.hj+'</div>\n' +
                     '                        <div class="show-t2-fr-01">纳税总额：'+res.lshj+'</div>\n' +
                     '                    </div>\n' +
@@ -528,7 +532,7 @@
             yAxis : [
                 {
                     type : 'value',
-                    name: '万'
+                    name: '万元'
                 }
             ],
             series : [
@@ -619,6 +623,7 @@
                 {
                     type : 'category',
                     data : [],
+
                     axisTick: {
                         alignWithLabel: true
                     },
@@ -629,7 +634,8 @@
             ],
             yAxis : [
                 {
-                    type : 'value'
+                    type : 'value',
+                    name: '个数'
                 }
             ],
             series : [

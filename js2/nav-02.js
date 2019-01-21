@@ -1,7 +1,35 @@
 // 获取公司列表
 // 初始状态
-var QYDLidT = window.location.href.split("QYDLid=")[1];
-console.log(QYDLidT);
+// var QYDLidT = window.location.href.split("QYDLid=")[1];
+// var QYDLidgs =window.location.href.split("QYDLidgs=")[1];
+// var QYDLidlong =window.location.href.split("QYDLidlong=")[1];
+// var QYDLidlat =window.location.href.split("QYDLidlat=")[1];
+//
+// console.log(QYDLidT);
+// console.log(QYDLidgs);
+// console.log(QYDLidlong);
+// console.log(QYDLidlat);
+
+var need_url = window.location.href.split("?")[1];
+var a=need_url.split("&");       //将结果用&符分隔
+var QYDLidT = a[0].split("=")[1]; //参数值1
+
+
+
+
+
+// 改变图标
+var QYDLidT_index = QYDLidT.substr(QYDLidT.length-1,QYDLidT.length-0);
+console.log(QYDLidT_index);
+$(".nav").eq(QYDLidT_index).addClass("nav-a").addClass("nav-a1").siblings("").removeClass("nav-a").removeClass("nav-a1");
+var navImg = $(".nav").eq(QYDLidT_index).children().find("img").attr("src");
+var arr02= navImg.split("images/")[1];
+var arr03= arr02.split(".png")[0];
+var navAUrl = new Array("images/" + arr03 +"-a.png");
+var newnavAUrl = navAUrl.join("");
+$(".nav").eq(QYDLidT_index).find("img").attr("src",newnavAUrl);
+
+
 if(QYDLidT){
     sessionStorage.setItem("QYDLidT",QYDLidT)
 }else {
@@ -60,30 +88,38 @@ console.log(res);
             sessionStorage.setItem("page",page);
             var list = res.list;
             $(".fy-top").html("");
-            for(i = 0;i<list.length;i++){
-                var html = '<div class="fy-top-list clearfix" data-listId="'+list[i].id+'"   data-long="'+list[i].xzb+'"  data-lat="'+list[i].yzb+'" >\n' +
-                    '                            <div class="fy-top-list-fl fl">'+parseInt(i + 1)+'</div>\n' +
-                    '                            <div class="fy-top-list-fr fr">\n' +
-                    '                                <div class="fy-top-list-fr-01" title="'+list[i].name+'">'+list[i].name+'</div>\n' +
-                    '                                <div class="fy-top-list-fr-02" title="'+list[i].address+'" >'+list[i].address+'</div>\n' +
-                    '                            </div>\n' +
-                    '                        </div>';
-                $(".fy-top").append(html)
-            }
-            $(".fy-").removeClass("hide");
 
-            if(res.count == "1"){
-                $(".fy-").eq(1).addClass("hide");
-                $(".fy-").eq(2).addClass("hide");
-                $(".fy-").eq(3).addClass("hide");
+            if(list.length == "0"){
+                var html_no = '<div class="list_no_length">暂无数据!</div>';
+                $(".fy-top").append(html_no);
+
+            }else {
+                for(i = 0;i<list.length;i++){
+                    var html = '<div class="fy-top-list clearfix" data-listId="'+list[i].id+'"   data-long="'+list[i].xzb+'"  data-lat="'+list[i].yzb+'" >\n' +
+                        '                            <div class="fy-top-list-fl fl">'+parseInt(i + 1)+'</div>\n' +
+                        '                            <div class="fy-top-list-fr fr">\n' +
+                        '                                <div class="fy-top-list-fr-01" title="'+list[i].name+'">'+list[i].name+'</div>\n' +
+                        '                                <div class="fy-top-list-fr-02" title="'+list[i].address+'" >'+list[i].address+'</div>\n' +
+                        '                            </div>\n' +
+                        '                        </div>';
+                    $(".fy-top").append(html)
+                }
+                $(".fy-").removeClass("hide");
+
+                if(res.count == "1"){
+                    $(".fy-").eq(1).addClass("hide");
+                    $(".fy-").eq(2).addClass("hide");
+                    $(".fy-").eq(3).addClass("hide");
+                }
+                if(res.count =="2"){
+                    $(".fy-").eq(2).addClass("hide");
+                    $(".fy-").eq(3).addClass("hide");
+                }
+                if(res.count == "3"){
+                    $(".fy-").eq(3).addClass("hide");
+                }
             }
-            if(res.count =="2"){
-                $(".fy-").eq(2).addClass("hide");
-                $(".fy-").eq(3).addClass("hide");
-            }
-            if(res.count == "3"){
-                $(".fy-").eq(3).addClass("hide");
-            }
+
 
 
 
@@ -233,6 +269,50 @@ $(document).on("click",".fy-f01-c",function () {
 
 
 });
+// 点击最后一页
+$(document).on("click",".fy-02",function () {
+    var currentPage = $(this).text();
+    console.log(currentPage);
+
+    var sellStart = sessionStorage.getItem("sellStart");
+    var sellEnd = sessionStorage.getItem("sellEnd");
+    var payStart = sessionStorage.getItem("payStart");
+    var payEnd = sessionStorage.getItem("payEnd");
+    var typeId = sessionStorage.getItem("typeId");
+
+
+    $(".fy-").eq(0).html(currentPage-3);
+    $(".fy-").eq(1).html(currentPage-2);
+    $(".fy-").eq(2).html(currentPage-1);
+    $(".fy-").eq(3).html(currentPage).addClass("fy-a");
+    $(".fy-").eq(3).siblings().removeClass("fy-a");
+    $(".fy-f02").removeClass("fy-f02").addClass("fy-no");
+
+
+    if(sessionStorage.getItem("bb") == ""){
+        GetCompanyList(currentPage,sellStart,sellEnd,payStart,payEnd,QYDLidT);
+    }
+
+    var typeId = sessionStorage.getItem("typeId");
+    if(sessionStorage.getItem("bb") == "yes01"){
+        GetbbycList(currentPage,typeId);
+    }
+    if(sessionStorage.getItem("bb") == "yes02"){
+        GetwwcbbList(currentPage,typeId)
+    }
+
+
+
+
+
+
+
+
+
+
+
+});
+
 
 // 销售总额点击
 $(".list-02-sell").on("click",".list-02-t",function () {
@@ -464,32 +544,39 @@ function GetbbycList(currentPage,typeId) {
             sessionStorage.setItem("page",page);
             var list = res07.list;
             $(".fy-top").html("");
-            for(i = 0;i<list.length;i++){
-                var html = '<div class="fy-top-list clearfix" data-listId="'+list[i].id+'"   data-long="'+list[i].xzb+'"  data-lat="'+list[i].yzb+'" >\n' +
-                    '                            <div class="fy-top-list-fl fl">'+parseInt(i + 1)+'</div>\n' +
-                    '                            <div class="fy-top-list-fr fr">\n' +
-                    '                                <div class="fy-top-list-fr-01" title="'+list[i].name+'">'+list[i].name+'</div>\n' +
-                    '                                <div class="fy-top-list-fr-02" title="'+list[i].address+'" >'+list[i].address+'</div>\n' +
-                    '                            </div>\n' +
-                    '                        </div>';
-                $(".fy-top").append(html)
-            }
+            if(list.length == "0"){
+                var html_no = '<div class="list_no_length">暂无数据!</div>';
+                $(".fy-top").append(html_no);
+
+            }else {
+                for(i = 0;i<list.length;i++){
+                    var html = '<div class="fy-top-list clearfix" data-listId="'+list[i].id+'"   data-long="'+list[i].xzb+'"  data-lat="'+list[i].yzb+'" >\n' +
+                        '                            <div class="fy-top-list-fl fl">'+parseInt(i + 1)+'</div>\n' +
+                        '                            <div class="fy-top-list-fr fr">\n' +
+                        '                                <div class="fy-top-list-fr-01" title="'+list[i].name+'">'+list[i].name+'</div>\n' +
+                        '                                <div class="fy-top-list-fr-02" title="'+list[i].address+'" >'+list[i].address+'</div>\n' +
+                        '                            </div>\n' +
+                        '                        </div>';
+                    $(".fy-top").append(html)
+                }
 
 
-            if(page == "1"){
-                $(".fy-").eq(1).addClass("hide");
-                $(".fy-").eq(2).addClass("hide");
-                $(".fy-").eq(3).addClass("hide");
-                $(".fy-f02").addClass("fy-no")
+                if(page == "1"){
+                    $(".fy-").eq(1).addClass("hide");
+                    $(".fy-").eq(2).addClass("hide");
+                    $(".fy-").eq(3).addClass("hide");
+                    $(".fy-f02").addClass("fy-no")
+                }
+
+                if(page =="2"){
+                    $(".fy-").eq(2).addClass("hide");
+                    $(".fy-").eq(3).addClass("hide");
+                }
+                if(page == "3"){
+                    $(".fy-").eq(3).addClass("hide");
+                }
             }
 
-            if(page =="2"){
-                $(".fy-").eq(2).addClass("hide");
-                $(".fy-").eq(3).addClass("hide");
-            }
-            if(page == "3"){
-                $(".fy-").eq(3).addClass("hide");
-            }
 
 
 
@@ -544,33 +631,40 @@ function GetwwcbbList(currentPage,typeId) {
             sessionStorage.setItem("page",page);
             var list = res07.list;
             $(".fy-top").html("");
-            for(i = 0;i<list.length;i++){
-                var html = '<div class="fy-top-list clearfix" data-listId="'+list[i].id+'"   data-long="'+list[i].xzb+'"  data-lat="'+list[i].yzb+'" >\n' +
-                    '                            <div class="fy-top-list-fl fl">'+parseInt(i + 1)+'</div>\n' +
-                    '                            <div class="fy-top-list-fr fr">\n' +
-                    '                                <div class="fy-top-list-fr-01" title="'+list[i].name+'">'+list[i].name+'</div>\n' +
-                    '                                <div class="fy-top-list-fr-02" title="'+list[i].address+'" >'+list[i].address+'</div>\n' +
-                    '                            </div>\n' +
-                    '                        </div>';
-                $(".fy-top").append(html)
-            }
 
-            if(page == "1"){
-                $(".fy-").eq(1).addClass("hide");
-                $(".fy-").eq(2).addClass("hide");
-                $(".fy-").eq(3).addClass("hide");
-                $(".fy-f02").addClass("fy-no")
-            }
+            if(list.length == "0"){
+                var html_no = '<div class="list_no_length">暂无数据!</div>';
+                $(".fy-top").append(html_no);
+            }else {
+                for(i = 0;i<list.length;i++){
+                    var html = '<div class="fy-top-list clearfix" data-listId="'+list[i].id+'"   data-long="'+list[i].xzb+'"  data-lat="'+list[i].yzb+'" >\n' +
+                        '                            <div class="fy-top-list-fl fl">'+parseInt(i + 1)+'</div>\n' +
+                        '                            <div class="fy-top-list-fr fr">\n' +
+                        '                                <div class="fy-top-list-fr-01" title="'+list[i].name+'">'+list[i].name+'</div>\n' +
+                        '                                <div class="fy-top-list-fr-02" title="'+list[i].address+'" >'+list[i].address+'</div>\n' +
+                        '                            </div>\n' +
+                        '                        </div>';
+                    $(".fy-top").append(html)
+                }
 
-            if(page =="2"){
-                $(".fy-").eq(2).addClass("hide");
-                $(".fy-").eq(3).addClass("hide");
-            }
-            if(page == "3"){
-                $(".fy-").eq(3).addClass("hide");
-            }
+                if(page == "1"){
+                    $(".fy-").eq(1).addClass("hide");
+                    $(".fy-").eq(2).addClass("hide");
+                    $(".fy-").eq(3).addClass("hide");
+                    $(".fy-f02").addClass("fy-no")
+                }
+
+                if(page =="2"){
+                    $(".fy-").eq(2).addClass("hide");
+                    $(".fy-").eq(3).addClass("hide");
+                }
+                if(page == "3"){
+                    $(".fy-").eq(3).addClass("hide");
+                }
 
 
+
+            }
 
 
 
@@ -607,9 +701,8 @@ $(".search_all_fl02_int").keyup(function () {
             $(".search_all-down").html("");
             console.log(res);
             for(var i = 0;i<res.length;i++){
-                var html = ' <div class="search_all-down-text" data-listid="'+res[i].id+'"  data-long="'+res[i].xzb+'"  data-lat="'+res[i].yzb+'" >'+res[i].name+'</div>';
+                var html = ' <div class="search_all-down-text" data-typeId="'+res[i].QYDLId+'" data-listid="'+res[i].id+'"  data-long="'+res[i].xzb+'"  data-lat="'+res[i].yzb+'" >'+res[i].name+'</div>';
                 $(".search_all-down").prepend(html);
-
             }
 
             setTimeout(function () {
@@ -637,35 +730,56 @@ $(document).on("click",".search_all-down-text",function () {
     var kew = $(this).html();
     $(".search_all_fl02_int").val(kew);
     $(".search_all-down").addClass("hide");
+    var QYDLId_new = $(this).attr("data-typeId");
 
-
-
-    // 清除点
-    map.clearOverlays();
     var long = $(this).attr("data-long");
     var lat = $(this).attr("data-lat");
     var id = $(this).attr("data-listid");
-    var marker = new BMap.Marker(new BMap.Point(long,lat));
-    map.addOverlay(marker);                     // 将标注添加到地图中
-    map.centerAndZoom(new BMap.Point(long,lat), 12);
-    openwin(id)
 
 
-    $(".search_all_fl03").attr("data-listid",id);
-    $(".search_all_fl03").attr("data-long",long);
-    $(".search_all_fl03").attr("data-lat",lat);
+    if(QYDLId_new == QYDLidT ){
+        // 清除点
+        map.clearOverlays();
+
+        var marker = new BMap.Marker(new BMap.Point(long,lat));
+        map.addOverlay(marker);                     // 将标注添加到地图中
+        map.centerAndZoom(new BMap.Point(long,lat), 12);
+        openwin(id);
+
+
+        $(".search_all_fl03").attr("data-listid",id);
+        $(".search_all_fl03").attr("data-long",long);
+        $(".search_all_fl03").attr("data-lat",lat);
+    }else {
+        window.location.href = "nav-02.html?QYDLid="+QYDLId_new+"&QYDLidgs="+id+"&QYDLidlong="+long+"&QYDLidlat="+lat;
+    }
 });
 
-// $(document).on("click",".search_all_fl03_add",function () {
-//
+
+
+
+
+
+
+// if(QYDLidgs){
+//     var map = new BMap.Map("dituContent");
 //     map.clearOverlays();
-//     var long = $(this).attr("data-long");
-//     var lat = $(this).attr("data-lat");
-//     var id = $(this).attr("data-listid");
-//     var marker = new BMap.Marker(new BMap.Point(long,lat));
+//
+//     var marker = new BMap.Marker(new BMap.Point(QYDLidlong,QYDLidlat));
 //     map.addOverlay(marker);                     // 将标注添加到地图中
-//     map.centerAndZoom(new BMap.Point(long,lat), 12);
-//     openwin(id)
-//
-//
-// });
+//     map.centerAndZoom(new BMap.Point(QYDLidlong,QYDLidlat), 12);
+//     openwin(QYDLidgs);
+// }
+
+
+
+if(a[1].split("=")[1]){
+
+
+    var marker = new BMap.Marker(new BMap.Point(a[2].split("=")[1],a[3].split("=")[1]));
+    map.addOverlay(marker);                     // 将标注添加到地图中
+    map.centerAndZoom(new BMap.Point(a[2].split("=")[1],a[3].split("=")[1]), 12);
+    setTimeout(function () {
+        openwin(a[1].split("=")[1]);
+    },10)
+}

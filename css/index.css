@@ -77,5 +77,6 @@
 
 .Floating{width: 400px; }
 .Floating-l{width: 417px;}
-.Floating-title, .area-table, .se-table{width: 400px;}
+.Floating-title, .area-table, .se-table{width: 400px; }
 #table02{width: 100%;}
+#main02{top: -30px;}

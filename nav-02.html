@@ -43,8 +43,8 @@
                 <div class="nav-t1"><img class="nav-t1-img" src="images/nav-01.png" /></div>
                 <div class="nav-t2">首页</div>
             </a></div>
-            <div class="nav nav-a nav-a1"><a>
-                <div class="nav-t1"><img class="nav-t1-img" src="images/nav-02-a.png" /></div>
+            <div class="nav"><a>
+                <div class="nav-t1"><img class="nav-t1-img" src="images/nav-02.png" /></div>
                 <div class="nav-t2">电商企业</div>
             </a></div>
             <div class="nav"><a>
@@ -234,7 +234,7 @@
 
 <script src="js/echarts.min.js"></script>
 <script src="js2/url.js"></script>
-<script src="js2/nav-02.js"></script>
+
 <script type="text/javascript">
     var map = new BMap.Map("dituContent");          // 创建地图实例
     var point = new BMap.Point(121.524121,29.897272);  // 创建点坐标
@@ -244,6 +244,15 @@
 
 
     $(document).on("click",".fy-top-list",function () {
+
+
+
+        if( $(this).find(".fy-top-list-fr").hasClass("fy-top-list-fr-add")){
+
+        }else {
+            $(this).find(".fy-top-list-fr").addClass("fy-top-list-fr-add");
+            $(this).siblings().find(".fy-top-list-fr").removeClass("fy-top-list-fr-add");
+        }
         // 清除点
         map.clearOverlays();
 
@@ -444,6 +453,7 @@
 
     }
 </script>
+<script src="js2/nav-02.js"></script>
 <script>
     // 季度报表-表分析
     function earchts(yearId,year) {
@@ -475,7 +485,7 @@
             yAxis : [
                 {
                     type : 'value',
-                    name: '万'
+                    name: '万元'
 
                 }
             ],
@@ -608,34 +618,73 @@
             success:function(res031) {
                 console.log(res031);
 
+                var fzcz_url = res031.img.zcsb_fzbt;
+                var fzcz_url_cz = res031.img.zcsb_ssbt;
+                if(res031.img.zcsb_fzbt == ""){
+                    fzcz_url = "#";
+                }else {
+                    fzcz_url = imgurl + res031.img.zcsb_fzbt
+                }
 
-                $("#xs").html((res031.common.xs).toFixed(2));
+                if(res031.img.zcsb_ssbt == ""){
+                    fzcz_url_cz = "#";
+                }else {
+                    fzcz_url_cz = imgurl + res031.img.zcsb_ssbt
+                }
 
 
-                $("#wszm").attr("href",imgurl + res031.img.zcsb_fzbt);
-                $("#jzmj").html(res031.zf.jzmj);
-                $("#bzqj").html(res031.zf.date1+"/"+res031.zf.date2);
-                $("#btje").html(res031.zf.btje);
-                $("#zzs").html("");
-                $("#qysds").html("");
+
+
+                var sxje_01 = res031.common.xs;
+                if(sxje_01 == ""){
+                    sxje_01 = "";
+                }else {
+                    sxje_01 = (res031.common.xs).toFixed(2) + "万元"
+                }
+                var btje = res031.zf.btje + "万元";
+                if(res031.zf.btje == ""){btje = "";}
+                var qysds =res031.common.qysds;
+                var zzs =res031.common.zzs;
+                var jzmj = res031.zf.jzmj+ "㎡";
+                var bzqj = res031.zf.date1+"/"+res031.zf.date2;
+
+                if(res031.common.qysds == ""){qysds = "";}
+                if(res031.common.zzs == ""){zzs = "";}
+                if(res031.zf.jzmj == ""){jzmj = "";}
+                if(res031.zf.date1 == ""){bzqj = "";}
+
+
+
+                // 初始状态
+                $("#wszm").attr("href",fzcz_url);
+                $("#xs").html(sxje_01);
+                $("#btje").html(btje);
+                $("#zzs").html(zzs);
+                $("#qysds").html(qysds);
+                $("#jzmj").html(jzmj);
+                $("#bzqj").html(bzqj);
+
 
 
                 // 初始状态是房租补贴
                 if(text == "房租补贴"){
-                    $("#wszm").attr("href",imgurl + res031.img.zcsb_fzbt);
-                    $("#jzmj").html(res031.zf.jzmj);
-                    $("#bzqj").html(res031.zf.date1+"/"+res031.zf.date2);
-                    $("#btje").html(res031.zf.btje);
-                    $("#zzs").html("");
-                    $("#qysds").html("");
+                    $("#wszm").attr("href",fzcz_url);
+                    $("#xs").html(sxje_01);
+                    $("#btje").html(btje);
+                    $("#zzs").html(zzs);
+                    $("#qysds").html(qysds);
+                    $("#jzmj").html(jzmj);
+                    $("#bzqj").html(bzqj);
                 }
                 if(text == "财政补贴"){
-                    $("#wszm").attr("href",imgurl + res031.img.zcsb_ssbt);
-                    $("#jzmj").html("");
+
+                    $("#wszm").attr("href",fzcz_url_cz);
+                    $("#xs").html(sxje_01);
+                    $("#btje").html(btje);
+                    $("#zzs").html(zzs);
+                    $("#qysds").html(qysds);
+                    $("#jzmj").html(jzmj);
                     $("#bzqj").html("");
-                    $("#btje").html("");
-                    $("#zzs").html((res031.cz.zzs).toFixed(2));
-                    $("#qysds").html((res031.cz.qysds).toFixed(2));
                 }
 
 
@@ -663,6 +712,9 @@
         paddingAbsolute : true
     });
 </script>
+<script>
 
+
+</script>
 </body>
 </html>

@@ -66,5 +66,14 @@ $(".nav").hover(function () {
     }
 });
 $(document).on("click","#close",function () {
+    window.opener=null;
+    window.open('','_self');
     window.close();
-})
+});
+
+// var personId = sessionStorage.getItem("personalId");
+// if(personId){
+//
+// }else {
+//     window.location.href='http://hsds.haishu.gov.cn/'
+// }

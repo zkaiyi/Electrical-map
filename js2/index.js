@@ -156,7 +156,7 @@ function GetReportData(id,year) {
 
     $.ajax({
         type: "get",
-        url: callurl + "/Company/GetReportData",
+        url: callurl + "Company/GetReportData",
         data:json66,
         dataType: "json",
         contentType: 'application/json',
@@ -272,7 +272,7 @@ function sqdown(obj) {
 // 年份下拉内容
 var QYDLId = $(".Floating-title-01-a").attr("data-typeid");
 $.ajax({
-    url:callurl + "/Company/GetCompanyTypeYears?QYDLId=" + QYDLId,
+    url:callurl + "Company/GetCompanyTypeYears?QYDLId=" + QYDLId,
     type:"get",
     success:function (res) {
         $(".area-table-down-content").html("");
