@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/nav-02.css" />
     <link rel="stylesheet" href="css/index.css" />
-    <!--<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>-->
-    <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=6GDWC6jN5fYeiAVvDxqtcxs4AVlKjR11"></script>
+    <!--<script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=6GDWC6jN5fYeiAVvDxqtcxs4AVlKjR11"></script>-->
+    <!--<script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=6GDWC6jN5fYeiAVvDxqtcxs4AVlKjR11"></script>-->
+    <script src="js/getscript.js"></script>
     <title>首页</title>
 </head>
 <body>
@@ -205,13 +206,15 @@
         mapTypes:[
             BMAP_NORMAL_MAP,
             BMAP_HYBRID_MAP
+            // ,
+            // BMAP_PERSPECTIVE_MAP
         ],
         anchor: BMAP_ANCHOR_TOP_LEFT}));
     map.setCurrentCity("宁波");
 
 
     map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
-
+    map.enableAutoResize();//设置当地图容器发生改变时地图自动适应
     // var styleJson ="";
     // // 主题
     // $.ajax({
@@ -226,12 +229,6 @@
     // });
     //
     // map.setMapStyleV2({styleJson:styleJson});
-
-
-
-
-
-
 
 
 
@@ -263,18 +260,21 @@
                         offset   : new BMap.Size(-20, 15)    //设置文本偏移量
                     };
                     var label = new BMap.Label(res[i].name, opts);
-
-
-
                 }
-                marker.customData = {"sqid":res[i].id};
-                marker.customData = {"sqname":res[i].name};
+                var arraymarker={};
+                var sqid = res[i].id;
+                var sqname = res[i].name;
+                arraymarker.sqid = sqid;
+                arraymarker.sqname = sqname;
+                marker.customData = arraymarker;
+                // marker.customData = {"sqid":res[i].id};
+                // marker.customData = {"sqname":res[i].name};
                 map.addOverlay(marker);           // 将标注添
-                // console.log(marker);
+                console.log(marker);
                 marker.addEventListener('click',function(e){
                     var point_n = new BMap.Point(e.point.lng,e.point.lat);
                     var id = e.target.customData.sqid;
-                    console.log(point_n);
+                    console.log(id);
                     getinform(id,point_n);
                 });
 
@@ -293,12 +293,6 @@
 
                 });
                 map.addOverlay(label);
-
-
-
-
-
-
 
 
                 // 商圈轮廓

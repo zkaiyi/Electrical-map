@@ -46,7 +46,7 @@ sessionStorage.setItem("sellEnd","");
 sessionStorage.setItem("payStart","");
 sessionStorage.setItem("payEnd","");
 GetCompanyList("1","","","","",QYDLidT);
-function GetCompanyList(currentPage,sellStart,sellEnd,payStart,payEnd,QYDLId) {
+function GetCompanyList(currentPage,sellStart,sellEnd,payStart,payEnd,QYDLId,keyword) {
     var json = {
         pageSize:"6",
         currentPage:currentPage
@@ -65,6 +65,9 @@ function GetCompanyList(currentPage,sellStart,sellEnd,payStart,payEnd,QYDLId) {
     }
     if(QYDLId){
         json.QYDLId=QYDLId;
+    }
+    if(keyword){
+        json.keyword=keyword;
     }
     console.log(json);
 
@@ -89,11 +92,24 @@ console.log(res);
             var list = res.list;
             $(".fy-top").html("");
 
+
+
             if(list.length == "0"){
                 var html_no = '<div class="list_no_length">暂无数据!</div>';
                 $(".fy-top").append(html_no);
 
+                $(".fy-c").addClass("hide");
+
+                // 全部条数
+                $(".qbsj").html("0");
+
             }else {
+
+                // 全部条数
+                $(".qbsj").html(res.amount);
+
+                $(".fy-c").removeClass("hide");
+
                 for(i = 0;i<list.length;i++){
                     var html = '<div class="fy-top-list clearfix" data-listId="'+list[i].id+'"   data-long="'+list[i].xzb+'"  data-lat="'+list[i].yzb+'" >\n' +
                         '                            <div class="fy-top-list-fl fl">'+parseInt(i + 1)+'</div>\n' +
@@ -135,6 +151,8 @@ console.log(res);
 
 
 }
+
+
 
 // 翻页
 $(document).on("click",".fy-",function () {
@@ -281,12 +299,44 @@ $(document).on("click",".fy-02",function () {
     var typeId = sessionStorage.getItem("typeId");
 
 
+
+    var page = sessionStorage.getItem("page");
+
     $(".fy-").eq(0).html(currentPage-3);
     $(".fy-").eq(1).html(currentPage-2);
     $(".fy-").eq(2).html(currentPage-1);
     $(".fy-").eq(3).html(currentPage).addClass("fy-a");
     $(".fy-").eq(3).siblings().removeClass("fy-a");
     $(".fy-f02").removeClass("fy-f02").addClass("fy-no");
+
+
+
+
+
+
+    if(page == "1"){
+        $(".fy-").eq(0).html(currentPage).addClass("fy-a");
+        $(".fy-").eq(0).siblings().removeClass("fy-a");
+    }
+
+    if(page =="2"){
+        $(".fy-").eq(0).html(currentPage-1);
+        $(".fy-").eq(1).html(currentPage).addClass("fy-a");
+        $(".fy-").eq(1).siblings().removeClass("fy-a");
+    }
+    if(page == "3"){
+
+        $(".fy-").eq(0).html(currentPage-2);
+        $(".fy-").eq(1).html(currentPage-1);
+
+        $(".fy-").eq(2).html(currentPage).addClass("fy-a");
+        $(".fy-").eq(2).siblings().removeClass("fy-a");
+    }
+
+
+
+
+
 
 
     if(sessionStorage.getItem("bb") == ""){
@@ -300,14 +350,6 @@ $(document).on("click",".fy-02",function () {
     if(sessionStorage.getItem("bb") == "yes02"){
         GetwwcbbList(currentPage,typeId)
     }
-
-
-
-
-
-
-
-
 
 
 
@@ -511,6 +553,10 @@ $(document).on("click","#wwc",function () {
 
     }
 });
+// 点击报表异常全部
+$(document).on("click",".sift-btn-fr02",function () {
+    GetCompanyList("1");
+});
 // 数据报表异常列表
 function GetbbycList(currentPage,typeId) {
     var json = {
@@ -548,7 +594,19 @@ function GetbbycList(currentPage,typeId) {
                 var html_no = '<div class="list_no_length">暂无数据!</div>';
                 $(".fy-top").append(html_no);
 
+                 $(".fy-c").addClass("hide");
+
+                  // 全部条数
+                $(".qbsj").html("0");
+
+
             }else {
+
+                // 全部条数
+                $(".qbsj").html(res07.amount);
+
+                $(".fy-c").removeClass("hide");
+
                 for(i = 0;i<list.length;i++){
                     var html = '<div class="fy-top-list clearfix" data-listId="'+list[i].id+'"   data-long="'+list[i].xzb+'"  data-lat="'+list[i].yzb+'" >\n' +
                         '                            <div class="fy-top-list-fl fl">'+parseInt(i + 1)+'</div>\n' +
@@ -635,7 +693,22 @@ function GetwwcbbList(currentPage,typeId) {
             if(list.length == "0"){
                 var html_no = '<div class="list_no_length">暂无数据!</div>';
                 $(".fy-top").append(html_no);
+
+                 $(".fy-c").addClass("hide");
+
+                // 全部条数
+                $(".qbsj").html("0");
+
+
             }else {
+
+
+                // 全部条数
+                $(".qbsj").html(res07.amount);
+
+
+                $(".fy-c").removeClass("hide");
+
                 for(i = 0;i<list.length;i++){
                     var html = '<div class="fy-top-list clearfix" data-listId="'+list[i].id+'"   data-long="'+list[i].xzb+'"  data-lat="'+list[i].yzb+'" >\n' +
                         '                            <div class="fy-top-list-fl fl">'+parseInt(i + 1)+'</div>\n' +
@@ -743,7 +816,7 @@ $(document).on("click",".search_all-down-text",function () {
 
         var marker = new BMap.Marker(new BMap.Point(long,lat));
         map.addOverlay(marker);                     // 将标注添加到地图中
-        map.centerAndZoom(new BMap.Point(long,lat), 12);
+        map.centerAndZoom(new BMap.Point(long,lat), 17);
         openwin(id);
 
 
@@ -755,6 +828,16 @@ $(document).on("click",".search_all-down-text",function () {
     }
 });
 
+
+
+// 列表内搜索
+function listSearch() {
+
+    var antistop = $(".float-search-02-int").val();
+    console.log(antistop);
+
+    GetCompanyList("1","","","","",QYDLidT,antistop);
+}
 
 
 

@@ -80,3 +80,8 @@
 .Floating-title, .area-table, .se-table{width: 400px; }
 #table02{width: 100%;}
 #main02{top: -30px;}
+
+/*0128*/
+#main {
+    top: -28px;
+}

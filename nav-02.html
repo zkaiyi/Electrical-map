@@ -72,6 +72,12 @@
             <div class="Floating-l">
                 <div class="Floating-container-w">
                     <div class="Floating-container">
+                        <!--搜索模块-->
+                        <div class="float-search clearfix">
+                            <div class="float-search-01 fl"><img class="float-search-01-img" src="images/search_all.png"></div>
+                            <div class="float-search-02 fl"><input class="float-search-02-int" placeholder="搜索您想要查找的内容"></div>
+                            <div class="float-search-03 fr" onclick="listSearch()">搜索</div>
+                        </div>
                         <!--筛选模块-->
                         <div class="sift-container">
                             <div class="sift-item">
@@ -109,7 +115,8 @@
                                 </div>
                             </div>
                             <div class="sift-btn clearfix">
-                                <div class="sift-btn-fl fl" id="bbyc">报表异常（<span class="bbyc"></span>）</div>
+                                <div class="sift-btn-fl fl sift-btn-fr02">全部（<span class="qbsj"></span>）</div>
+                                <div class="sift-btn-fl fl sift-btn-fr03" id="bbyc">报表异常（<span class="bbyc"></span>）</div>
                                 <div class="sift-btn-fl sift-btn-fr fr" id="wwc">未完成申报（<span class="wwc"></span>）</div>
                             </div>
                         </div>
@@ -201,7 +208,11 @@
         $("#zcsbb").siblings().removeClass("show-table-title-fl-a");
         var Csjjbbxl02 = sessionStorage.getItem("Csjjbbxl02");
         var gsid = $("#zcsbb").attr("data-id");
-        sbbdata(gsid,Csjjbbxl02)
+        sbbdata(gsid,Csjjbbxl02);
+
+
+
+
 
 
     }
@@ -261,7 +272,7 @@
         console.log(long,lat);
         var marker = new BMap.Marker(new BMap.Point(long,lat));
         map.addOverlay(marker);                     // 将标注添加到地图中
-        map.centerAndZoom(new BMap.Point(long,lat), 12);
+        map.centerAndZoom(new BMap.Point(long,lat), 17);
 
         var id = $(this).attr("data-listid");
         openwin(id)
@@ -316,10 +327,16 @@
                         console.log(res03);
                         var yearList = res03.yearSelect;
                         var btList = res03.typeResult;
-                        if(btList.length == 0  ){
+                        console.log(btList.length)
+                        if(btList.length == "0"  ){
+
+
                             children03_bt = "";
+
                         }else {
                             children03_bt = btList[0];
+
+
 
                             for(var i=0;i<btList.length;i++){
                                 children03 +='<div class="show-table-content-03-t1-fl-t1-t" onclick="choose05(this)" data-chooesID="'+id+'" data-textId="'+btList[i]+'">'+btList[i]+'</div>';
@@ -402,6 +419,9 @@
                     '                            <div class="show-table-content-02-main">\n' +
                     '                                <div id="main"></div>\n' +
                     '                            </div>\n' +
+                    '                            <div class="show-table-content-02-main03">\n' +
+                    '                                <div id="main03"></div>\n' +
+                    '                            </div>\n' +
                     '                        </div>\n' +
                     '                        <!--政策申报表-->\n' +
                     '                        <div class="show-table-content-03 hide" id="zcsbb_c">\n' +
@@ -420,19 +440,28 @@
                     '                                <div class="show-table-content-03-t2-fl fl"><a id="wszm" href="#" target="_blank">完税证明</a></div>\n' +
                     '                            </div>\n' +
                     '                            <div class="show-table-content-03-t2 clearfix">\n' +
-                    '\n' +
+                    '                                <div class="show-table-content-03-t2-title01">季报表</div>\n'+
                     '                                <div class="show-cz fl">销售总额:</div>\n' +
                     '                                <div class="show-cz01 fl" id="xs"></div>\n' +
                     '                                <div class="show-cz fl">增值税:</div>\n' +
                     '                                <div class="show-cz01 fl" id="zzs"></div>\n' +
                     '                                <div class="show-cz fl">企业所得税:</div>\n' +
                     '                                <div class="show-cz01 fl" id="qysds"></div>\n' +
+                    '                                <div class="show-table-content-03-t2-title01">政策申报</div>\n'+
                     '                                <div class="show-cz fl">申领金额:</div>\n' +
                     '                                <div class="show-cz01 fl" id="btje"></div>\n' +
                     '                                <div class="show-cz fl">补助区间:</div>\n' +
                     '                                <div class="show-cz01 fl" id="bzqj" style="width: 49.99999999999999999999999998%;"></div>\n' +
                     '                                <div class="show-cz fl">建筑面积:</div>\n' +
                     '                                <div class="show-cz01 fl" id="jzmj"></div>\n' +
+                    '                                <div class="show-cz fl">增值税:</div>\n' +
+                    '                                <div class="show-cz01 fl" id="zzs02"></div>\n' +
+                    '                                <div class="show-cz fl">企业所得税:</div>\n' +
+                    '                                <div class="show-cz01 fl" id="qysds02"></div>\n' +
+                    '                                <div class="show-cz fl">营改税:</div>\n' +
+                    '                                <div class="show-cz01 fl" id="ygs"></div>\n' +
+                    '                                <div class="show-cz fl">营业税:</div>\n' +
+                    '                                <div class="show-cz01 fl" id="yys"></div>\n' +
                     '                            </div>\n' +
                     '                        </div>\n' +
                     '                    </div>\n' +
@@ -473,6 +502,9 @@
                 bottom: '3%',
                 containLabel: true
             },
+            legend: {
+                data:['销售额']
+            },
             xAxis : [
                 {
                     type : 'category',
@@ -504,6 +536,59 @@
         }
 
 
+
+
+        // 税收分开
+        var myChart03 = echarts.init(document.getElementById('main03'));
+        option03 = {
+            color: ['#3398DB'],
+            tooltip : {
+                trigger: 'axis',
+                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            legend: {
+                data:['税额']
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    data : ['第一季度', '第二季度', '第三季度', '第四季度'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value',
+                    name: '亿元'
+
+                }
+            ],
+            series : [
+            ]
+        };
+
+        if (option03 && typeof option03 === "object") {
+            myChart03.setOption(option03, true);
+        }
+
+
+
+
+
+
+
+
+
         var json = {
 
         };
@@ -529,7 +614,19 @@
                             type:'bar',
                             barWidth: '60%',
                             data:res021.HJ
-                        },
+                        }
+                        // ,
+                        // {
+                        //     name:'税额',
+                        //     type:'line',
+                        //     data:res021.LSHJ
+                        // }
+                    ]
+                });
+
+
+                myChart03.setOption({
+                    series : [
                         {
                             name:'税额',
                             type:'line',
@@ -537,6 +634,8 @@
                         }
                     ]
                 });
+
+
 
 
 
@@ -616,19 +715,30 @@
             type:"post",
             data:json,
             success:function(res031) {
+
+                $("#wszm").parent().removeClass("hide");
+                $(".span-bt").parent().parent().removeClass("hide");
+
+
+
+
                 console.log(res031);
 
                 var fzcz_url = res031.img.zcsb_fzbt;
                 var fzcz_url_cz = res031.img.zcsb_ssbt;
                 if(res031.img.zcsb_fzbt == ""){
+                    $("#wszm").attr("target","");
                     fzcz_url = "#";
                 }else {
+                    $("#wszm").attr("target","_blank");
                     fzcz_url = imgurl + res031.img.zcsb_fzbt
                 }
 
                 if(res031.img.zcsb_ssbt == ""){
                     fzcz_url_cz = "#";
+                    $("#wszm").attr("target","");
                 }else {
+                    $("#wszm").attr("target","_blank");
                     fzcz_url_cz = imgurl + res031.img.zcsb_ssbt
                 }
 
@@ -648,10 +758,24 @@
                 var jzmj = res031.zf.jzmj+ "㎡";
                 var bzqj = res031.zf.date1+"/"+res031.zf.date2;
 
-                if(res031.common.qysds == ""){qysds = "";}
-                if(res031.common.zzs == ""){zzs = "";}
-                if(res031.zf.jzmj == ""){jzmj = "";}
-                if(res031.zf.date1 == ""){bzqj = "";}
+
+                console.log("增值税" + res031.cz.yys);
+                var zzs02 =res031.cz.zzs;
+                console.log(zzs02);
+                var qysds02 =res031.cz.qysds;
+                var yys02 = res031.cz.yys;
+                var ygs02 = res031.cz.ygs;
+
+
+                if(res031.common.qysds === ""){qysds = "";}
+                if(res031.common.zzs === ""){zzs = "";}
+                if(res031.zf.jzmj === ""){jzmj = "";}
+                if(res031.zf.date1 === ""){bzqj = "";}
+
+                if(res031.cz.zzs === ""){zzs02 = "";}
+                if(res031.cz.qysds === ""){qysds02 = "";}
+                if(res031.cz.yys === ""){yys02 = "";}
+                if(res031.cz.ygs === ""){ygs02 = "";}
 
 
 
@@ -663,6 +787,40 @@
                 $("#qysds").html(qysds);
                 $("#jzmj").html(jzmj);
                 $("#bzqj").html(bzqj);
+                $("#wszm").html("房屋租赁合同");
+
+                $("#zzs02").html("");
+                $("#qysds02").html("");
+                $("#ygs").html("");
+                $("#yys").html("");
+
+                if($(".span-bt").text()== ""){
+                    $("#wszm").parent().addClass("hide");
+                    $(".span-bt").parent().parent().addClass("hide");
+                }
+
+                if($(".span-bt").text()== "财政补贴"){
+                    $("#wszm").html("完税证明");
+
+                    $("#wszm").attr("href",fzcz_url_cz);
+                    $("#xs").html(sxje_01);
+                    $("#btje").html(btje);
+                    $("#zzs").html(zzs);
+                    $("#qysds").html(qysds);
+                    $("#jzmj").html(jzmj);
+                    $("#bzqj").html("");
+                    $("#wszm").html("完税证明");
+
+                    $("#zzs02").html(zzs02);
+                    $("#qysds02").html(qysds02);
+                    $("#ygs").html(ygs02);
+                    $("#yys").html(yys02);
+
+
+
+                }
+
+
 
 
 
@@ -675,6 +833,9 @@
                     $("#qysds").html(qysds);
                     $("#jzmj").html(jzmj);
                     $("#bzqj").html(bzqj);
+                    $("#wszm").html("房屋租赁合同");
+
+
                 }
                 if(text == "财政补贴"){
 
@@ -685,6 +846,14 @@
                     $("#qysds").html(qysds);
                     $("#jzmj").html(jzmj);
                     $("#bzqj").html("");
+                    $("#wszm").html("完税证明");
+
+                    $("#zzs02").html(zzs02);
+                    $("#qysds02").html(qysds02);
+                    $("#ygs").html(ygs02);
+                    $("#yys").html(yys02);
+
+
                 }
 
 
@@ -713,7 +882,6 @@
     });
 </script>
 <script>
-
 
 </script>
 </body>
