@@ -390,6 +390,7 @@
                 var children = "";
 
 
+
                 // 季度报表下拉
                 $.ajax({
                     url:callurl + "Company/GetSCJEYearList/" + id,
@@ -401,6 +402,8 @@
                         for(var i=res02.length-1;i>=0;i--){
                             children +='<div class="s-t-c-0-t-f-t-t" onclick="choose02(this)" data-yearID="'+res02[i]+'" data-chooesID="'+id+'">'+res02[i]+'年</div>';
                         }
+                        // 季度报表下拉初始时间
+                        sessionStorage.setItem("jbbbdataxl",res02[0]);
                     },
                     error:function (xml) {
                         console.log(xml);
@@ -419,8 +422,8 @@
                     '                        <div class="show-t2-fr-01" title="'+res.scName+'">商圈名称：'+res.scName+'</div>\n' +
                     '                        <div class="show-t2-fr-01" title="'+res.address+'">商圈位置：'+res.address+'</div>\n' +
                     '                        <div class="show-t2-fr-01" title="'+res.simple+'">入驻企业：'+res.simple+'家</div>\n' +
-                    '                        <div class="show-t2-fr-01">销售总额：'+res.hj+'</div>\n' +
-                    '                        <div class="show-t2-fr-01">纳税总额：'+res.lshj+'</div>\n' +
+                    '                        <div class="show-t2-fr-01">销售总额：'+res.hj+'万元</div>\n' +
+                    '                        <div class="show-t2-fr-01">纳税总额：'+res.lshj+'万元</div>\n' +
                     '                    </div>\n' +
                     '                </div>\n' +
                     '                <div class="show-table">\n' +
@@ -439,8 +442,12 @@
                     '                                    <div class="show-table-content-02-title-fl-t2 hide">'+children+'</div>\n' +
                     '                                </div>\n' +
                     '                            </div>\n' +
+                    '                            <div class="show-table-content-02-main-66"><span class="show-table-content-02-main-66-nf"></span><span class="show-table-content-02-main-66-sq">'+res.scName+'</span>销售总额与纳税总额季度分析</div>\n'+
                     '                            <div class="show-table-content-02-main">\n' +
                     '                                <div id="main"></div>\n' +
+                    '                            </div>\n' +
+                    '                            <div class="show-table-content-02-main-w">\n' +
+                    '                                <div id="main5"></div>\n' +
                     '                            </div>\n' +
                     '                        </div>\n' +
                     '                        <!--政策申报表-->\n' +
@@ -453,14 +460,14 @@
                     '                                </div>\n' +
                     '                                <!--财政补贴-->\n' +
                     '                                <div class="show-table-content-03-t1-fl fl">\n' +
-                    '                                    <div class="show-table-content-03-t1-fl-t" onclick="choose03(this)"><span class="span-03">财政补贴</span><img class="show-table-content-03-t1-fl-t-img" src="images/index-down.png" /></div>\n' +
+                    '                                    <div class="show-table-content-03-t1-fl-t" onclick="choose03(this)"><span class="span-03 span-033">财政补贴</span><img class="show-table-content-03-t1-fl-t-img" src="images/index-down.png" /></div>\n' +
                     '                                    <div class="show-table-content-03-t1-fl-t1 hide">\n' +
                     '                                        <div class="show-table-content-03-t1-fl-t1-t" onclick="choose05(this)" data-id="'+id+'" data-type="0">财政补贴</div>\n' +
                     '                                        <div class="show-table-content-03-t1-fl-t1-t" onclick="choose05(this)" data-id="'+id+'" data-type="1">房租补贴</div>\n' +
                     '                                    </div>\n' +
                     '                                </div>\n' +
                     '                                <!--完税证明-->\n' +
-                    '                                <div class="show-table-content-03-t2-fl fl">总申报金额：  <span id="zsbje"></span><span class="zsbje-dw">万元</span></div>\n' +
+                    '                                <div class="show-table-content-03-t2-fl fl hide">总申报金额：  <span id="zsbje"></span><span class="zsbje-dw">万元</span></div>\n' +
                     '                            </div>\n' +
                     '                            <div class="show-table-content-03-t2 clearfix">\n' +
                     '                                <div id="main02"></div>\n' +
@@ -474,12 +481,28 @@
 
                 var infoWindow = new BMap.InfoWindow(sContent);// 创建信息窗口对象
                 // map.openInfoWindow(infoWindow, map.getCenter());      // 打开信息窗口
+                // var opts = {
+                //     height: 600 // 信息窗口高度
+                // };
+
                 map.openInfoWindow(infoWindow,point);      // 打开信息窗口
 
                 // 季度报表初始化
                 setTimeout(function () {
-                    earchts(id)
-                },10)
+                    earchts(id);
+                    var jbbbdataxl_copy = sessionStorage.getItem("jbbbdataxl");
+                    if(jbbbdataxl_copy == "undefined"){
+                        $(".show-table-content-02-main-66-nf").html("")
+                    }else {
+                        $(".show-table-content-02-main-66-nf").html(sessionStorage.getItem("jbbbdataxl") + "年")
+                    }
+
+                },10);
+                console.log(res.scName);
+
+
+
+
 
 
             },
@@ -544,6 +567,61 @@
         }
 
 
+        // 税收
+        var myChart5 = echarts.init(document.getElementById('main5'));
+        app.title = '坐标轴刻度与标签对齐';
+        option5 = {
+            color: ['#3398DB'],
+            tooltip : {
+                trigger: 'axis',
+                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            legend: {
+                data:['税额']
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    data : ['第一季度', '第二季度', '第三季度', '第四季度'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value',
+                    name: '亿元'
+                }
+            ],
+            series : [
+                // {
+                //     name:'直接访问',
+                //     type:'bar',
+                //     barWidth: '60%',
+                //     data:[10, 52, 200, 334]
+                // }
+            ]
+        };
+
+        if (option5 && typeof option5 === "object") {
+            myChart5.setOption(option5, true);
+        }
+
+
+
+
+
+
+
         var json = {
 
         };
@@ -569,14 +647,37 @@
                             type:'bar',
                             barWidth: '60%',
                             data:res021.hjList
-                        },
+                        }
+                        // ,
+                        // {
+                        //     name:'税额',
+                        //     type:'line',
+                        //     data:res021.lshjList,
+                        //     color:'#C23531'
+                        // }
+                    ]
+                });
+
+
+                myChart5.setOption({
+                    series : [
+                        // {
+                        //     name:'销售额',
+                        //     type:'bar',
+                        //     barWidth: '60%',
+                        //     data:res021.hjList
+                        // },
                         {
                             name:'税额',
                             type:'line',
-                            data:res021.lshjList
+                            data:res021.lshjList,
+                            color:'#C23531'
                         }
                     ]
                 });
+
+
+
 
 
 
@@ -658,8 +759,9 @@
         if(type){
             json04.type=type;
         }
+        console.log(type);
 
-      if(type == "0"){
+      if(type == 0){
         $(".show-table-content-03-t2-fl").addClass("hide");
       }else {
           $(".show-table-content-03-t2-fl").removeClass("hide");
@@ -744,6 +846,8 @@
         var year = $(obj).attr("data-yearID");
         var yearId = $(obj).attr("data-chooesid");
         earchts(yearId,year)
+        $(".show-table-content-02-main-66-nf").html(year + "年")
+
     }
     // 政策申报表选择年份
     function choose03(obj) {
@@ -767,11 +871,22 @@
         var yearId = $(obj).attr("data-chooesid");
 
         sessionStorage.setItem("zcxldate02",nf_vaule02);
+        var type_t = $(".span-033").text();
+        var type = "";
+        if(type_t === "财政补贴"){
+            type = 0
+        }
+        if(type_t === "房租补贴"){
+            type = 1
+        }
+        if(type == ""){
+            type = ""
+        }
 
 
+        earchts02(yearId,nf_vaule02,type);
 
 
-        earchts02(yearId,nf_vaule02);
 
     }
 

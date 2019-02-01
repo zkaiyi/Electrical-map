@@ -196,3 +196,9 @@
 .show-table-content-02-main03{position: relative;    margin-top: 160px;}
 #main{top: 0px;}
 #main03{height: 150px;margin-top: 10px;}
+
+/*0129*/
+.show-table-content {
+    height: 200px;}
+.show-table{width: 559px;}
+#main{width: 516px;}

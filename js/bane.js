@@ -134,9 +134,8 @@ var cookie = {
 
 };
 
-cookie.set("personId","1111","3600");
 
-
+cookie.set("personId","1","1");
 
 var personId = cookie.get("personId");
 if(personId){

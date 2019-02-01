@@ -193,10 +193,13 @@
         var Csjjbbxl = sessionStorage.getItem("Csjjbbxl");
         earchts(gsid,Csjjbbxl);
 
+        $(".nqylxyear").html(Csjjbbxl);
+
         // 清除生报表年份选择
         sessionStorage.removeItem("sbb-year");
         var children03_bt =  sessionStorage.getItem("children03_bt");
         $(".span-bt").html(children03_bt)
+
 
     }
     function tabs03() {
@@ -368,7 +371,7 @@
                     '                        <div class="show-t2-fr-01" title="'+res.SSJD+'">所&nbsp;在&nbsp;&nbsp;地：'+res.SSJD+'</div>\n' +
                     '                        <div class="show-t2-fr-01">企业法人：'+res.QYFR+'</div>\n' +
                     '                        <div class="show-t2-fr-01">法人电话：'+res.QYFRDH+'</div>\n' +
-                    '                        <div class="show-t2-fr-01">登记时间：'+res.rkrq+'</div>\n' +
+                    '                        <div class="show-t2-fr-01">登记时间：'+res.rkrq.split(" ")[0]+'</div>\n' +
                     '                    </div>\n' +
                     '                </div>\n' +
                     '                <div class="show-table">\n' +
@@ -410,7 +413,7 @@
                     '                        <!--季度报表-->\n' +
                     '                        <div class="show-table-content-02 hide" id="jdbb_c">\n' +
                     '                            <div class="show-table-content-02-title clearfix">\n' +
-                    '                                <div class="show-table-content-02-title-fl fl">各企业类型销售总额分析</div>\n' +
+                    '                                <div class="show-table-content-02-title-fl fl"><span class="nqylxyear"></span>年企业类型销售总额分析</div>\n' +
                     '                                <div class="show-table-content-02-title-fr  fr">\n' +
                     '                                    <div class="show-table-content-02-title-fl-t1" onClick="choose01()"><span class="span-02 span-02-nf">年份</span><img class="show-table-content-02-title-fl-t1-img" src="images/index-down.png" /></div>\n' +
                     '                                    <div class="show-table-content-02-title-fl-t2 hide">'+children+'</div>\n' +
@@ -440,27 +443,27 @@
                     '                                <div class="show-table-content-03-t2-fl fl"><a id="wszm" href="#" target="_blank">完税证明</a></div>\n' +
                     '                            </div>\n' +
                     '                            <div class="show-table-content-03-t2 clearfix">\n' +
-                    '                                <div class="show-table-content-03-t2-title01">季报表</div>\n'+
-                    '                                <div class="show-cz fl">销售总额:</div>\n' +
-                    '                                <div class="show-cz01 fl" id="xs"></div>\n' +
-                    '                                <div class="show-cz fl">增值税:</div>\n' +
-                    '                                <div class="show-cz01 fl" id="zzs"></div>\n' +
-                    '                                <div class="show-cz fl">企业所得税:</div>\n' +
-                    '                                <div class="show-cz01 fl" id="qysds"></div>\n' +
+                    '                                <div class="show-table-content-03-t2-title01 hide">季报表</div>\n'+
+                    '                                <div class="show-cz fl hide">销售总额:</div>\n' +
+                    '                                <div class="show-cz01 hide fl" id="xs"></div>\n' +
+                    '                                <div class="show-cz  hide fl">增值税:</div>\n' +
+                    '                                <div class="show-cz01 hide fl" id="zzs"></div>\n' +
+                    '                                <div class="show-cz hide fl">企业所得税:</div>\n' +
+                    '                                <div class="show-cz01 hide fl" id="qysds"></div>\n' +
                     '                                <div class="show-table-content-03-t2-title01">政策申报</div>\n'+
-                    '                                <div class="show-cz fl">申领金额:</div>\n' +
+                    '                                <div class="show-cz fl" id="btje01">申领金额:</div>\n' +
                     '                                <div class="show-cz01 fl" id="btje"></div>\n' +
-                    '                                <div class="show-cz fl">补助区间:</div>\n' +
+                    '                                <div class="show-cz fl" id="bzqj01">补助区间:</div>\n' +
                     '                                <div class="show-cz01 fl" id="bzqj" style="width: 49.99999999999999999999999998%;"></div>\n' +
-                    '                                <div class="show-cz fl">建筑面积:</div>\n' +
+                    '                                <div class="show-cz fl" id="jzmj01">建筑面积:</div>\n' +
                     '                                <div class="show-cz01 fl" id="jzmj"></div>\n' +
-                    '                                <div class="show-cz fl">增值税:</div>\n' +
+                    '                                <div class="show-cz fl" id="zzs0201">增值税:</div>\n' +
                     '                                <div class="show-cz01 fl" id="zzs02"></div>\n' +
-                    '                                <div class="show-cz fl">企业所得税:</div>\n' +
+                    '                                <div class="show-cz fl" id="qysds0201">企业所得税:</div>\n' +
                     '                                <div class="show-cz01 fl" id="qysds02"></div>\n' +
-                    '                                <div class="show-cz fl">营改税:</div>\n' +
+                    '                                <div class="show-cz fl" id="ygs01">营改税:</div>\n' +
                     '                                <div class="show-cz01 fl" id="ygs"></div>\n' +
-                    '                                <div class="show-cz fl">营业税:</div>\n' +
+                    '                                <div class="show-cz fl" id="yys01">营业税:</div>\n' +
                     '                                <div class="show-cz01 fl" id="yys"></div>\n' +
                     '                            </div>\n' +
                     '                        </div>\n' +
@@ -799,6 +802,27 @@
                     $(".span-bt").parent().parent().addClass("hide");
                 }
 
+
+
+                $("#zzs0201").addClass("hide");
+                $("#zzs02").addClass("hide");
+                $("#qysds0201").addClass("hide");
+                $("#qysds02").addClass("hide");
+                $("#ygs01").addClass("hide");
+                $("#ygs").addClass("hide");
+                $("#yys01").addClass("hide");
+                $("#yys").addClass("hide");
+
+                $("#btje01").removeClass("hide");
+                $("#btje").removeClass("hide");
+                $("#bzqj01").removeClass("hide");
+                $("#bzqj").removeClass("hide");
+                $("#jzmj01").removeClass("hide");
+                $("#jzmj").removeClass("hide");
+
+
+
+
                 if($(".span-bt").text()== "财政补贴"){
                     $("#wszm").html("完税证明");
 
@@ -811,8 +835,8 @@
                     $("#bzqj").html("");
                     $("#wszm").html("完税证明");
 
-                    $("#zzs02").html(zzs02);
-                    $("#qysds02").html(qysds02);
+                    $("#zzs02").html(zzs02 + "万元");
+                    $("#qysds02").html(qysds02 + "万元");
                     $("#ygs").html(ygs02);
                     $("#yys").html(yys02);
 
@@ -836,6 +860,27 @@
                     $("#wszm").html("房屋租赁合同");
 
 
+                    $("#zzs0201").addClass("hide");
+                    $("#zzs02").addClass("hide");
+                    $("#qysds0201").addClass("hide");
+                    $("#qysds02").addClass("hide");
+                    $("#ygs01").addClass("hide");
+                    $("#ygs").addClass("hide");
+                    $("#yys01").addClass("hide");
+                    $("#yys").addClass("hide");
+
+
+                    $("#btje01").removeClass("hide");
+                    $("#btje").removeClass("hide");
+                    $("#bzqj01").removeClass("hide");
+                    $("#bzqj").removeClass("hide");
+                    $("#jzmj01").removeClass("hide");
+                    $("#jzmj").removeClass("hide");
+
+
+
+
+
                 }
                 if(text == "财政补贴"){
 
@@ -848,10 +893,31 @@
                     $("#bzqj").html("");
                     $("#wszm").html("完税证明");
 
-                    $("#zzs02").html(zzs02);
-                    $("#qysds02").html(qysds02);
+                    $("#zzs02").html(zzs02 + "万元");
+                    $("#qysds02").html(qysds02 + "万元");
                     $("#ygs").html(ygs02);
                     $("#yys").html(yys02);
+
+
+                    $("#zzs0201").removeClass("hide");
+                    $("#zzs02").removeClass("hide");
+                    $("#qysds0201").removeClass("hide");
+                    $("#qysds02").removeClass("hide");
+                    $("#ygs01").removeClass("hide");
+                    $("#ygs").removeClass("hide");
+                    $("#yys01").removeClass("hide");
+                    $("#yys").removeClass("hide");
+
+                    $("#btje01").addClass("hide");
+                    $("#btje").addClass("hide");
+                    $("#bzqj01").addClass("hide");
+                    $("#bzqj").addClass("hide");
+                    $("#jzmj01").addClass("hide");
+                    $("#jzmj").addClass("hide");
+
+
+
+
 
 
                 }

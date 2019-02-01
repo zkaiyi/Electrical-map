@@ -292,6 +292,8 @@ $(document).on("click",".fy-02",function () {
     var currentPage = $(this).text();
     console.log(currentPage);
 
+    $(".fy-f01").removeClass("fy-no");
+
     var sellStart = sessionStorage.getItem("sellStart");
     var sellEnd = sessionStorage.getItem("sellEnd");
     var payStart = sessionStorage.getItem("payStart");
@@ -314,15 +316,23 @@ $(document).on("click",".fy-02",function () {
 
 
 
+
+
+
+
     if(page == "1"){
         $(".fy-").eq(0).html(currentPage).addClass("fy-a");
         $(".fy-").eq(0).siblings().removeClass("fy-a");
+
+        $(".fy-f01").addClass("fy-no");
     }
 
     if(page =="2"){
         $(".fy-").eq(0).html(currentPage-1);
         $(".fy-").eq(1).html(currentPage).addClass("fy-a");
         $(".fy-").eq(1).siblings().removeClass("fy-a");
+
+        $(".fy-f01").addClass("fy-no");
     }
     if(page == "3"){
 
@@ -331,7 +341,15 @@ $(document).on("click",".fy-02",function () {
 
         $(".fy-").eq(2).html(currentPage).addClass("fy-a");
         $(".fy-").eq(2).siblings().removeClass("fy-a");
+
+        $(".fy-f01").addClass("fy-no");
     }
+
+    if(page == "4"){
+        $(".fy-f01").addClass("fy-no");
+    }
+
+
 
 
 
@@ -555,7 +573,7 @@ $(document).on("click","#wwc",function () {
 });
 // 点击报表异常全部
 $(document).on("click",".sift-btn-fr02",function () {
-    GetCompanyList("1");
+    GetCompanyList("1","","","","",QYDLidT);
 });
 // 数据报表异常列表
 function GetbbycList(currentPage,typeId) {

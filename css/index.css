@@ -83,5 +83,10 @@
 
 /*0128*/
 #main {
-    top: -28px;
+    top: -28px;position: relative;
 }
+/*0129*/
+.show-table-content-02-main-66{text-align: center;font-size: 13px;}
+#main02{width: 516px;}
+.show-table-content-02-main-w{position: relative;margin-top: -28px;}
+#main5{width: 516px;    height: 150px;margin: auto;}
